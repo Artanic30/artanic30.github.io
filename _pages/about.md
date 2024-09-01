@@ -36,7 +36,7 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 - [SPHINX-X: Scaling Data and Parameters for a Family of Multi-modal Large Language Models](https://arxiv.org/abs/2402.05935)<br>Dongyang Liu\*, Renrui Zhang\*, **Longtian Qiu\***, Siyuan Huang\*, Weifeng Lin\*, Shitian Zhao, Shijie Geng, Ziyi Lin, Peng Jin, Kaipeng Zhang, Wenqi Shao, Chao Xu, Conghui He, Junjun He, Hao Shao, Pan Lu, Hongsheng Li, Yu Qiao, Peng Gao, **ICML 2024**
 - [Mining Fine-Grained Image-Text Alignment for Zero-Shot Captioning via Text-Only Training](https://arxiv.org/abs/2401.02347)<br>**Longtian Qiu\***, Shan Ning\*, Xuming He, **AAAI 2024**
 - [HOICLIP: Efficient Knowledge Transfer for HOI Detection with Vision-Language Models](https://arxiv.org/abs/2303.15786)<br>Shan Ning\*, **Longtian Qiu\***, Xuming He, **CVPR 2023**
-- [Joint-mae: 2d-3d joint masked autoencoders for 3d point cloud pre-training](https://arxiv.org/abs/2302.14007)<br>Ziyu Guo, Renrui Zhang, **Longtian Qiu\***, Xianzhi Li, Pheng-Ann Heng, **IJCAI 2023**
+- [Joint-mae: 2d-3d joint masked autoencoders for 3d point cloud pre-training](https://arxiv.org/abs/2302.14007)<br>Ziyu Guo, Renrui Zhang, **Longtian Qiu**, Xianzhi Li, Pheng-Ann Heng, **IJCAI 2023**
 - [Calip: Zero-shot enhancement of clip with parameter-free attention](https://arxiv.org/abs/2209.14169)<br>Ziyu Guo\*, Renrui Zhang\*,**Longtian Qiu\***, Xianzheng Ma, Xupeng Miao, Xuming He, Bin Cui, **AAAI 2023**
 
 [//]: # (# 🎖 Honors and Awards)
