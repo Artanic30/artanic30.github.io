@@ -22,6 +22,7 @@ Hi there! I am a third-year Ph.D. candidate at ShanghaiTech university's [PLUS](
 My research interest includes Multimodel Learning and Data-centric AI. In pursuit of this goal, my current research work involves **multimodal large language model**, **image captioning** and **human object detection**.
 
 # 🔥 News
+- *2025.09*: &nbsp;🎉🎉 one papers accepted by NeurIPS 2025
 - *2025.01*: &nbsp;🎉🎉 one papers accepted by ICLR 2025
 - *2024.07*: &nbsp;🎉🎉 one papers accepted by ECCV 2024
 - *2024.05*: &nbsp;🎉🎉 one papers accepted by ICML 2024
@@ -33,6 +34,7 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 
 # 📝 Publications
 \*Equal contribution
+- [NoisyGRPO: Incentivizing Multimodal CoT Reasoning via Noise Injection and Bayesian Estimation](https://artanic30.github.io/project_pages/NoisyGRPO)<br>**Longtian Qiu\**, Shan Ning, Jiaxun Sun, Xuming He**NeurIPS 2025**
 - [Lumina-T2X: Scalable Flow-based Large Diffusion Transformer for Flexible Resolution Generation](https://arxiv.org/pdf/2405.05945)<br>Peng Gao\*, Le Zhuo\*, Dongyang Liu\*, Ruoyi Du\*, Xu Luo\*, **Longtian Qiu\***, Yuhang Zhang, Rongjie Huang, Shijie Geng, Renrui Zhang, Junlin Xie, Wenqi Shao, Zhengkai Jiang, Tianshuo Yang, Weicai Ye, Tong He, Jingwen He, Junjun He, Yu Qiao, Hongsheng Li, **ICLR 2025**
 - [SPHINX: The joint mixing of weights, tasks, and visual embeddings for multi-modal large language models](https://arxiv.org/abs/2311.07575)<br>Ziyi Lin\*, Chris Liu\*, Renrui Zhang\*, Peng Gao\*, **Longtian Qiu\***, Han Xiao, Han Qiu, Chen Lin, Wenqi Shao, Keqin Chen, Jiaming Han, Siyuan Huang, Yichi Zhang, Xuming He, Hongsheng Li, Yu Qiao, **ECCV 2024**
 - [SPHINX-X: Scaling Data and Parameters for a Family of Multi-modal Large Language Models](https://arxiv.org/abs/2402.05935)<br>Dongyang Liu\*, Renrui Zhang\*, **Longtian Qiu\***, Siyuan Huang\*, Weifeng Lin\*, Shitian Zhao, Shijie Geng, Ziyi Lin, Peng Jin, Kaipeng Zhang, Wenqi Shao, Chao Xu, Conghui He, Junjun He, Hao Shao, Pan Lu, Hongsheng Li, Yu Qiao, Peng Gao, **ICML 2024**
