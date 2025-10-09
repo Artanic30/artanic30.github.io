@@ -64,7 +64,7 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 
 # 📖 Educations
 - *2018.09 - 2022.06*, **B.E.** in School of Information Science and Technology, ShanghaiTech University, Shanghai, China
-- *2022.06 - now*, **Ph.D.** in School of Information Science and Technology, ShanghaiTech University, Shanghai, China
+- *2022.09 - now*, **Ph.D.** in School of Information Science and Technology, ShanghaiTech University, Shanghai, China
 
 
 # 💻 Academic Service
