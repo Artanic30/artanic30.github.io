@@ -17,7 +17,7 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-Hi there! I am a third-year Ph.D. candidate at ShanghaiTech university's [PLUS](https://plus.sist.shanghaitech.edu.cn) lab, under the mentorship of Prof. [Xuming He](https://faculty.sist.shanghaitech.edu.cn/faculty/hexm/index.html). Previously, I got my B.Sc. degree in 2022 from ShanghaiTech University. I also had the wonderful opportunity to spend time as a research intern at Shanghai AI Lab, supervised by [Dr. Peng Gao](https://scholar.google.com/citations?user=_go6DPsAAAAJ&hl=zh-CN).
+Hi there! I am a forth-year Ph.D. candidate at ShanghaiTech university's [PLUS](https://plus.sist.shanghaitech.edu.cn) lab, under the mentorship of Prof. [Xuming He](https://faculty.sist.shanghaitech.edu.cn/faculty/hexm/index.html). Previously, I got my B.Sc. degree in 2022 from ShanghaiTech University. I also had the wonderful opportunity to spend time as a research intern at Shanghai AI Lab, supervised by [Dr. Peng Gao](https://scholar.google.com/citations?user=_go6DPsAAAAJ&hl=zh-CN).
 
 My research interest includes Multimodel Learning and Data-centric AI. In pursuit of this goal, my current research work involves **multimodal large language model**, and **post training**.
 
