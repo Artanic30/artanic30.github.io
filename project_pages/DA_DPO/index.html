@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <!-- TODO: Replace with your paper title and author names -->
+  <meta name="title" content="NoisyGRPO: Incentivizing Multimodal CoT Reasoning via Noise Injection - Longtian Qiu">
+  <!-- TODO: Write a compelling 150-160 character description of your research -->
+  <meta name="description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
+  <!-- TODO: Add 5-10 relevant keywords for your research area -->
+  <meta name="keywords" content="reinforcement learning, multimodal learning, GRPO, machine learning, computer vision, AI">
+  <!-- TODO: List all authors -->
+  <meta name="author" content="Longtian Qiu, Shan Ning, Jiaxuan Sun, Xuming He">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <!-- TODO: Replace with your institution or lab name -->
+  <meta property="og:site_name" content="INSTITUTION_OR_LAB_NAME">
+  <!-- TODO: Same as paper title above -->
+  <meta property="og:title" content="NoisyGRPO">
+  <!-- TODO: Same as description above -->
+  <meta property="og:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NoisyGRPO">
+  <meta property="article:published_time" content="2025-10-08T00:00:00.000Z">
+  <meta property="article:author" content="Longtian Qiu">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="Reinforcement Learning">
+  <meta property="article:tag" content="Multimodal Learning">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- TODO: Replace with your lab/institution Twitter handle -->
+  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
+  <!-- TODO: Replace with first author's Twitter handle -->
+  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
+  <!-- TODO: Same as paper title above -->
+  <meta name="twitter:title" content="NoisyGRPO">
+  <!-- TODO: Same as description above -->
+  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
+  <!-- TODO: Same as social preview image above -->
+  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="NoisyGRPO - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="NoisyGRPO">
+  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
+  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
+  <meta name="citation_publication_date" content="2024">
+  <meta name="citation_conference_title" content="CONFERENCE_NAME">
+  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>NoisyGRPO</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/avater.jpg">
+  <link rel="apple-touch-icon" href="static/images/avater.jpg">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "NoisyGRPO",
+    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "FIRST_AUTHOR_NAME",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "INSTITUTION_NAME"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "SECOND_AUTHOR_NAME",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "INSTITUTION_NAME"
+        }
+      }
+    ],
+    "datePublished": "2024-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CONFERENCE_OR_JOURNAL_NAME"
+    },
+    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
+    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
+    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
+    "abstract": "FULL_ABSTRACT_TEXT_HERE",
+    "citation": "BIBTEX_CITATION_HERE",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "RESEARCH_AREA_1"
+      },
+      {
+        "@type": "Thing", 
+        "name": "RESEARCH_AREA_2"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "INSTITUTION_OR_LAB_NAME",
+    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
+    "logo": "https://YOUR_DOMAIN.com/static/images/avater.jpg",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown -->
+<!--  <div class="more-works-container">-->
+<!--    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">-->
+<!--      <i class="fas fa-flask"></i>-->
+<!--      More Works-->
+<!--      <i class="fas fa-chevron-down dropdown-arrow"></i>-->
+<!--    </button>-->
+<!--    <div class="more-works-dropdown" id="moreWorksDropdown">-->
+<!--      <div class="dropdown-header">-->
+<!--        <h4>More Works from Our Lab</h4>-->
+<!--        <button class="close-btn" onclick="toggleMoreWorks()">-->
+<!--          <i class="fas fa-times"></i>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="works-list">-->
+<!--        &lt;!&ndash; TODO: Replace with your lab's related works &ndash;&gt;-->
+<!--        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">-->
+<!--          <div class="work-info">-->
+<!--            &lt;!&ndash; TODO: Replace with actual paper title &ndash;&gt;-->
+<!--            <h5>Paper Title 1</h5>-->
+<!--            &lt;!&ndash; TODO: Replace with brief description &ndash;&gt;-->
+<!--            <p>Brief description of the work and its main contribution.</p>-->
+<!--            &lt;!&ndash; TODO: Replace with venue and year &ndash;&gt;-->
+<!--            <span class="work-venue">Conference/Journal 2024</span>-->
+<!--          </div>-->
+<!--          <i class="fas fa-external-link-alt"></i>-->
+<!--        </a>-->
+<!--        &lt;!&ndash; TODO: Add more related works or remove extra items &ndash;&gt;-->
+<!--        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">-->
+<!--          <div class="work-info">-->
+<!--            <h5>Paper Title 2</h5>-->
+<!--            <p>Brief description of the work and its main contribution.</p>-->
+<!--            <span class="work-venue">Conference/Journal 2023</span>-->
+<!--          </div>-->
+<!--          <i class="fas fa-external-link-alt"></i>-->
+<!--        </a>-->
+<!--        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">-->
+<!--          <div class="work-info">-->
+<!--            <h5>Paper Title 3</h5>-->
+<!--            <p>Brief description of the work and its main contribution.</p>-->
+<!--            <span class="work-venue">Conference/Journal 2023</span>-->
+<!--          </div>-->
+<!--          <i class="fas fa-external-link-alt"></i>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- TODO: Replace with your paper title -->
+            <h1 class="title is-1 publication-title">NoisyGRPO: Incentivizing Multimodal CoT Reasoning via Noise Injection and Bayesian Estimation</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- TODO: Replace with your paper authors and their personal links -->
+              <span class="author-block">
+                <a href="https://artanic30.github.io/" target="_blank">Longtian Qiu</a><sup>1</sup>,</span>
+                <span class="author-block">
+                  <a href="https://scholar.google.com/citations?user=7dMbghYAAAAJ&hl=en" target="_blank">Shan Ning</a><sup>1</sup>,<sup>3</sup></span>
+                  <span class="author-block">
+                    <a href="" target="_blank">Jiaxuan Sun</a></a><sup>1</sup>,</span>
+                 <span class="author-block">
+                      <a href="https://faculty.sist.shanghaitech.edu.cn/faculty/hexm/index.html" target="_blank">Xuming He</a></a><sup>1,2</sup></span>
+                  </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <!-- TODO: Replace with your institution and conference/journal info -->
+                    <span class="author-block">ShanghaiTech University, Shanghai, China<sup>1</sup>,<br>Shanghai Engineering Research Center of Intelligent Vision and Imaging<sup>2</sup>,<br>Lingang Laboratory, Shanghai, China<sup>3</sup> <br>NeurIPS 2025</span>
+                    <!-- TODO: Remove this line if no equal contribution -->
+<!--                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>-->
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- TODO: Update with your arXiv paper ID -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/abs/2510.21122" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- TODO: Add your supplementary material PDF or remove this section -->
+<!--                    <span class="link-block">-->
+<!--                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"-->
+<!--                      class="external-link button is-normal is-rounded is-dark">-->
+<!--                      <span class="icon">-->
+<!--                        <i class="fas fa-file-pdf"></i>-->
+<!--                      </span>-->
+<!--                      <span>Supplementary</span>-->
+<!--                    </a>-->
+<!--                  </span>-->
+
+                  <!-- TODO: Replace with your GitHub repository URL -->
+                  <span class="link-block">
+                    <a href="https://github.com/Artanic30/NoisyGRPO" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- TODO: Update with your arXiv paper ID -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2510.21122" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+
+                <span class="link-block">
+                      <a href="https://huggingface.co/collections/Artanic30/noisygrpo" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <p style="font-size:18px">🤗</p>
+                      </span>
+                  <span>Model</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<!--<section class="hero teaser">-->
+<!--  <div class="container is-max-desktop">-->
+<!--    <div class="hero-body">-->
+<!--      &lt;!&ndash; TODO: Replace with your teaser video &ndash;&gt;-->
+<!--      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">-->
+<!--        &lt;!&ndash; TODO: Add your video file path here &ndash;&gt;-->
+<!--        <source src="static/videos/banner_video.mp4" type="video/mp4">-->
+<!--      </video>-->
+<!--      &lt;!&ndash; TODO: Replace with your video description &ndash;&gt;-->
+<!--      <h2 class="subtitle has-text-centered">-->
+<!--        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. -->
+<!--      </h2>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p>
+    Reinforcement learning (RL) has shown promise in enhancing the general Chain-of-Thought (CoT) reasoning capabilities of multimodal large language models (MLLMs). However, when applied to improve general CoT reasoning, existing RL frameworks often struggle to generalize beyond the training distribution.  To address this, we propose NoisyGRPO, a systematic multimodal RL framework that introduces controllable noise into visual inputs for enhanced exploration and explicitly models the advantage estimation process via a Bayesian framework.
+    Specifically, NoisyGRPO improves RL training by: (1) <b>Noise-Injected Exploration Policy</b>: Perturbing visual inputs with Gaussian noise to encourage exploration across a wider range of visual scenarios; and (2) <b>Bayesian Advantage Estimation</b>: Formulating advantage estimation as a principled Bayesian inference problem, where the injected noise level serves as a prior and the observed trajectory reward as the likelihood. This Bayesian modeling fuses both sources of information to compute a robust posterior estimate of trajectory advantage, effectively guiding MLLMs to prefer visually grounded trajectories over noisy ones.
+    Experiments on standard CoT quality, general capability, and hallucination benchmarks demonstrate that NoisyGRPO substantially improves generalization and robustness, especially in RL settings with small-scale MLLMs such as Qwen2.5-VL 3B.          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+          <h2 class="title is-3">Motivation</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/teaser_performance.png" alt="First research result visualization" loading="lazy" style="max-width: 50%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+        <h2 class="subtitle has-text-centered">
+          Evaluation performance on the MMStar benchmark over training iterations
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/assets/reward_std.png" alt="Second research result visualization" loading="lazy" style="max-width: 50%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">
+          The standard deviation of rewards, reflecting the exploration degree of the policy.
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/assets/teaser_train_reward.png" alt="Third research result visualization" loading="lazy" style="max-width: 50%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">
+         The accuracy reward, indicating how well the model fits the training data.
+       </h2>
+     </div>
+  </div>
+
+      <h4 class=" is-3">Higher training rewards under the GRPO framework do not consistently yield better evaluation performance. We identify two primary factors contributing to this issue: (1) <b>Limited Policy Exploration.</b> RL in the generative model domain utilizes temperature sampling to generate multiple rollouts for policy exploration; however, as noted in DAPO, these rollouts often converge to near-identical outputs during training, leading to insufficient exploration and early deterministic policy. (2) <b>Missing process supervision.</b> Rule-based rewards judge only the final answer, leaving the intermediate reasoning steps unsupervised; the policy, therefore, learns shortcuts and visual hallucinations that do not transfer out of distribution.</h4>
+</div>
+</div>
+</section>
+<!-- End image carousel -->
+
+
+
+
+<!-- Youtube video -->
+<!--<section class="hero is-small is-light">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      &lt;!&ndash; Paper video. &ndash;&gt;-->
+<!--      <h2 class="title is-3">Video Presentation</h2>-->
+<!--      <div class="columns is-centered has-text-centered">-->
+<!--        <div class="column is-four-fifths">-->
+<!--          -->
+<!--          <div class="publication-video">-->
+<!--            &lt;!&ndash; TODO: Replace with your YouTube video ID &ndash;&gt;-->
+<!--            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!-- End youtube video -->
+
+
+<!-- Video carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Method</h2>
+      <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/pipeline.jpg" alt="First research result visualization" loading="lazy"/>
+        <!-- TODO: Replace with description of this result -->
+        <h2 class="subtitle has-text-centered">
+          <b>Overall pipeline of NoisyGRPO.</b> For each image-question pair, we sample noise and inject it into the image. The policy model generates rollouts based on the perturbed inputs, and the reward function evaluates them. We then compute the posterior advantage by combining the noise-based prior with the reward-based observation.
+        </h2>
+      </div>
+      <h4 class=" is-3">Our key innovation is to <b>inject controllable noise</b> into visual inputs during rollouts, thereby encouraging diverse exploration and providing an unbiased, trajectory-level measure of reasoning difficulty. However, while promoting exploration, noise injection can negatively impact policy optimization by introducing a discrepancy in the visual input distribution between training and inference. This discrepancy leads to <b>off-policy issues</b>, such as inaccurate advantage estimation. To tackle this issue, we introduce a <b>Bayesian advantage estimation framework</b> that treats the <b>injected noise as a prior and the trajectory reward as the likelihood within a principled Bayesian formulation</b>, which allows us to explicitly calibrate the policy update according to trajectory-level noise and reward signals.</h4>
+
+    </div>
+  </div>
+</section>
+<!-- End video carousel -->
+
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+          <h2 class="title is-3">Experiments</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/mmecot.jpg" alt="First research result visualization" loading="lazy"/>
+        <!-- TODO: Replace with description of this result -->
+        <h2 class="subtitle has-text-centered">
+          <b>Results on CoT quality benchmark MME-CoT.</b> We report results across three evaluation dimensions of CoT quality to comprehensively characterize the performance of NoisyGRPO.
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/main.jpg" alt="Second research result visualization" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+          <b>Performance Comparison on General, Hallucination, and Real-World Benchmarks.</b> The CP, FP, IR, LR, ST, MA, and AVG denote Coarse Perception, Fine-grained Perception, Instance Reasoning, Logical Reasoning, Science & Technology, Math, and the average performance, respectively.
+The symbols ↑ and ↓ indicate that higher or lower values are preferred.
+AMB. Gen. and AMB.  represent the generative and discriminative components of the AMBER benchmark.
+        </h2>
+      </div>
+
+
+
+    </div>
+            <h4 class=" is-3">To comprehensively evaluate the CoT reasoning capabilities of NoisyGRPO, we select benchmarks from three perspectives: (1) <b>CoT Quality Evaluation</b>. We use the MME-CoT benchmark, which assesses the quality, robustness, and efficiency of multi-modal CoT reasoning. The benchmark covers six categories of questions—including math, OCR, logic, science, space-time, and general scene—providing a holistic view of CoT performance. (2) <b>General Capability Evaluation</b>. We adopt the MMStar benchmark, which is constructed by carefully selecting high-quality samples from existing datasets.
+(3) <b>Hallucination Evaluation</b>. We employ the AMBER benchmark to evaluate both the generative and discriminative hallucination behaviors of the model, offering a thorough analysis of output reliability. Additionally, we include MME-RealWorld-Lite to assess VQA performance in real-world scenarios.</h4>
+
+
+<!--      <h4 class=" is-3">Higher training rewards under the GRPO framework do not consistently yield better evaluation performance. We identify two primary factors contributing to this issue: (1) <b>Limited Policy Exploration.</b> RL in the generative model domain utilizes temperature sampling to generate multiple rollouts for policy exploration; however, as noted in DAPO, these rollouts often converge to near-identical outputs during training, leading to insufficient exploration and early deterministic policy. (2) <b>Missing process supervision.</b> Rule-based rewards judge only the final answer, leaving the intermediate reasoning steps unsupervised; the policy, therefore, learns shortcuts and visual hallucinations that do not transfer out of distribution.</h4>-->
+</div>
+
+<div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/kalman_weight.png" alt="First research result visualization" loading="lazy" style="max-width: 60%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+      </div>
+         <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/cot_length_compare.png" alt="First research result visualization" loading="lazy" style="max-width: 60%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+
+      </div>
+         <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/mmstar_cot_average.png" alt="First research result visualization" loading="lazy" style="max-width: 60%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+
+      </div>
+         <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/mmstar_cot_coarse perception.png" alt="First research result visualization" loading="lazy" style="max-width: 60%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+
+      </div>
+         <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/mmstar_cot_fine-grained perception.png" alt="First research result visualization" loading="lazy" style="max-width: 60%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+
+      </div>
+         <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/mmstar_cot_instance reasoning.png" alt="First research result visualization" loading="lazy" style="max-width: 60%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+
+      </div>
+         <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/mmstar_cot_logical reasoning.png" alt="First research result visualization" loading="lazy" style="max-width: 60%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+
+      </div>
+         <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/mmstar_cot_science & technology.png" alt="First research result visualization" loading="lazy" style="max-width: 60%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+
+      </div>
+         <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/mmstar_cot_math.png" alt="First research result visualization" loading="lazy" style="max-width: 60%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+
+</div>
+  </div>
+
+  <h4 class=" is-3"><b>Performance over iteration and training statistics.</b> We report the evaluation results of NoisyGRPO-3B on the MMStar benchmark to demonstrate the comprehensive capabilities of the MLLM. For both Importance Weight and Completion Length, the shaded regions represent the variance across samples.</h4>
+
+</div>
+
+
+</div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+          <h2 class="title is-3">Visualization</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/assets/vis_1.jpg" alt="First research result visualization" loading="lazy" style="max-width: 100%; height: auto; margin: 0 auto; display: block;"/>
+        <!-- TODO: Replace with description of this result -->
+        <h2 class="subtitle has-text-centered">
+          Illustration of "Answer Correctness is a Partial Observation"
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/assets/vis_3.jpg" alt="Second research result visualization" loading="lazy" style="max-width: 100%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">
+          Illustration of Training rollouts and trajectory reward.
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/assets/vis_4.jpg" alt="Third research result visualization" loading="lazy" style="max-width: 100%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">
+         Illustration of Training rollouts and trajectory reward.
+       </h2>
+     </div>
+
+        <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/assets/vis_5.jpg" alt="Third research result visualization" loading="lazy" style="max-width: 100%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">
+         Comparison of rollouts generation between vanilla GRPO and NoisyGRPO.
+       </h2>
+     </div>
+  </div>
+
+<!--      <h4 class=" is-3">Higher training rewards under the GRPO framework do not consistently yield better evaluation performance. We identify two primary factors contributing to this issue: (1) <b>Limited Policy Exploration.</b> RL in the generative model domain utilizes temperature sampling to generate multiple rollouts for policy exploration; however, as noted in DAPO, these rollouts often converge to near-identical outputs during training, leading to insufficient exploration and early deterministic policy. (2) <b>Missing process supervision.</b> Rule-based rewards judge only the final answer, leaving the intermediate reasoning steps unsupervised; the policy, therefore, learns shortcuts and visual hallucinations that do not transfer out of distribution.</h4>-->
+</div>
+</div>
+</section>
+
+
+<!-- Paper poster -->
+<!--<section class="hero is-small is-light">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      <h2 class="title">Poster</h2>-->
+
+<!--      &lt;!&ndash; TODO: Replace with your poster PDF &ndash;&gt;-->
+<!--      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">-->
+<!--          </iframe>-->
+<!--        -->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
+<!--End paper poster -->
+
+
+
+<!--BibTex citation-->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{qiu2025noisygrpo,
+  title={NoisyGRPO: Incentivizing Multimodal CoT Reasoning via Noise Injection and Bayesian Estimation},
+  author={Qiu, Longtian and Ning, Shan and Sun, Jiaxuan and He, Xuming},
+  journal={arXiv preprint arXiv:2510.21122},
+  year={2025},
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation-->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
