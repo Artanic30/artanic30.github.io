@@ -39,7 +39,7 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 
 \*Equal contribution
 
-- [DA-DPO: Cost-efficient Difficulty-aware Preference Optimization for Reducing MLLM Hallucinations](https://artanic30.github.io/project_pages/DA_DPO)<br>**Longtian Qiu**, Shan Ning, Chuyu Zhang, Jiaxun Sun, Xuming He, **TMLR 2025**
+- [DA-DPO: Cost-efficient Difficulty-aware Preference Optimization for Reducing MLLM Hallucinations](https://artanic30.github.io/project_pages/DA-DPO)<br>**Longtian Qiu**, Shan Ning, Chuyu Zhang, Jiaxun Sun, Xuming He, **TMLR 2025**
 - [NoisyGRPO: Incentivizing Multimodal CoT Reasoning via Noise Injection and Bayesian Estimation](https://artanic30.github.io/project_pages/NoisyGRPO)<br>**Longtian Qiu**, Shan Ning, Jiaxun Sun, Xuming He, **NeurIPS 2025**
 - [Lumina-T2X: Scalable Flow-based Large Diffusion Transformer for Flexible Resolution Generation](https://arxiv.org/pdf/2405.05945)<br>Peng Gao\*, Le Zhuo\*, Dongyang Liu\*, Ruoyi Du\*, Xu Luo\*, **Longtian Qiu\***, Yuhang Zhang, Rongjie Huang, Shijie Geng, Renrui Zhang, Junlin Xie, Wenqi Shao, Zhengkai Jiang, Tianshuo Yang, Weicai Ye, Tong He, Jingwen He, Junjun He, Yu Qiao, Hongsheng Li, **ICLR 2025**
 - [SPHINX: The joint mixing of weights, tasks, and visual embeddings for multi-modal large language models](https://arxiv.org/abs/2311.07575)<br>Ziyi Lin\*, Chris Liu\*, Renrui Zhang\*, Peng Gao\*, **Longtian Qiu\***, Han Xiao, Han Qiu, Chen Lin, Wenqi Shao, Keqin Chen, Jiaming Han, Siyuan Huang, Yichi Zhang, Xuming He, Hongsheng Li, Yu Qiao, **ECCV 2024**
