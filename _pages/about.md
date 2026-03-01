@@ -18,11 +18,14 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 
 Hi there! I am a forth-year Ph.D. candidate at ShanghaiTech university's [PLUS](https://plus.sist.shanghaitech.edu.cn) lab, under the mentorship of Prof. [Xuming He](https://faculty.sist.shanghaitech.edu.cn/faculty/hexm/index.html). Previously, I got my B.Sc. degree in 2022 from ShanghaiTech University. I also had the wonderful opportunity to spend time as a research intern at Shanghai AI Lab, supervised by [Dr. Peng Gao](https://scholar.google.com/citations?user=_go6DPsAAAAJ&hl=zh-CN).
+I am currently a research intern at **Tencent Youtu Lab**, where I focus on post-training for multimodal document understanding.
 
-My research interest includes Multimodel Learning and Data-centric AI. In pursuit of this goal, my current research work involves **multimodal large language model**, and **post training**.
+My research interest includes Multimodel Learning and Data-centric AI. In pursuit of this goal, my current research work involves **multimodal large language model**, and **post training with RL**.
 
 # 🔥 News
 
+- *2026.02*: &nbsp;🎉🎉 one papers accepted by CVPR 2026
+- *2026.01*: &nbsp;🎉🎉 one papers accepted by ICLR 2026
 - *2025.12*: &nbsp;🎉🎉 one papers accepted by TMLR 2025
 - *2025.12*: I attended the NeurIPS 2025 conference onsite in San Diego and gave a poster presentation.
 - *2025.09*: &nbsp;🎉🎉 one papers accepted by NeurIPS 2025
@@ -39,6 +42,8 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 
 \*Equal contribution
 
+- [WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition]()<br>Shan Ning, **Longtian Qiu**, Jiaxuan Sun, Xuming He, **CVPR 2026**
+- [Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum](https://openreview.net/forum?id=TH1Tgbjkm7)<br>Shan Ning, **Longtian Qiu**, Xuming He, **ICLR 2026**
 - [DA-DPO: Cost-efficient Difficulty-aware Preference Optimization for Reducing MLLM Hallucinations](https://artanic30.github.io/project_pages/DA-DPO)<br>**Longtian Qiu**, Shan Ning, Chuyu Zhang, Jiaxun Sun, Xuming He, **TMLR 2025**
 - [NoisyGRPO: Incentivizing Multimodal CoT Reasoning via Noise Injection and Bayesian Estimation](https://artanic30.github.io/project_pages/NoisyGRPO)<br>**Longtian Qiu**, Shan Ning, Jiaxun Sun, Xuming He, **NeurIPS 2025**
 - [Lumina-T2X: Scalable Flow-based Large Diffusion Transformer for Flexible Resolution Generation](https://arxiv.org/pdf/2405.05945)<br>Peng Gao\*, Le Zhuo\*, Dongyang Liu\*, Ruoyi Du\*, Xu Luo\*, **Longtian Qiu\***, Yuhang Zhang, Rongjie Huang, Shijie Geng, Renrui Zhang, Junlin Xie, Wenqi Shao, Zhengkai Jiang, Tianshuo Yang, Weicai Ye, Tong He, Jingwen He, Junjun He, Yu Qiao, Hongsheng Li, **ICLR 2025**
