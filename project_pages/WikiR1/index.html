@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum">
+  <meta name="description" content="Wiki-R1 is a curriculum reinforcement learning framework for KB-VQA that bridges the distribution gap from pretraining to noisy retrieval settings via controllable data generation and curriculum sampling, achieving state-of-the-art results on EVQA and InfoSeek.">
+  <meta name="keywords" content="KB-VQA, multimodal reasoning, curriculum reinforcement learning, retrieval-augmented generation, Wiki-R1, MLLM">
+  <meta name="author" content="Shan Ning, Longtian Qiu, Xuming He">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ShanghaiTech University">
+  <meta property="og:title" content="Wiki-R1">
+  <meta property="og:description" content="Wiki-R1 is a curriculum reinforcement learning framework for KB-VQA that bridges the distribution gap from pretraining to noisy retrieval settings via controllable data generation and curriculum sampling.">
+  <meta property="og:url" content="https://artanic30.github.io/project_pages/WikiR1/">
+  <meta property="og:image" content="https://artanic30.github.io/project_pages/WikiR1/static/images/assets/teaser.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Wiki-R1">
+  <meta property="article:published_time" content="2026-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Shan Ning">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="Multimodal Reasoning">
+  <meta property="article:tag" content="KB-VQA">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
+  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
+  <meta name="twitter:title" content="Wiki-R1">
+  <meta name="twitter:description" content="Wiki-R1 is a curriculum RL framework that improves KB-VQA reasoning under noisy retrieval.">
+  <meta name="twitter:image" content="https://artanic30.github.io/project_pages/WikiR1/static/images/assets/teaser.jpg">
+  <meta name="twitter:image:alt" content="Wiki-R1 - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum">
+  <meta name="citation_author" content="Ning, Shan">
+  <meta name="citation_author" content="Qiu, Longtian">
+  <meta name="citation_author" content="He, Xuming">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="ICLR 2026">
+  <meta name="citation_pdf_url" content="">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>Wiki-R1</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/avater.jpg">
+  <link rel="apple-touch-icon" href="static/images/avater.jpg">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum",
+    "description": "Wiki-R1 is a curriculum reinforcement learning framework for KB-VQA that bridges the distribution gap from pretraining to noisy retrieval settings via controllable data generation and curriculum sampling.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Shan Ning",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "ShanghaiTech University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Longtian Qiu",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "ShanghaiTech University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Xuming He",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "ShanghaiTech University"
+        }
+      }
+    ],
+    "datePublished": "2026-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "ICLR"
+    },
+    "url": "https://artanic30.github.io/project_pages/WikiR1/",
+    "image": "https://artanic30.github.io/project_pages/WikiR1/static/images/assets/teaser.jpg",
+    "keywords": ["KB-VQA", "multimodal reasoning", "curriculum reinforcement learning", "retrieval-augmented generation"],
+    "abstract": "Knowledge-Based Visual Question Answering (KB-VQA) requires models to answer questions about an image by integrating external knowledge, posing significant challenges due to noisy retrieval and the structured, encyclopedic nature of the knowledge base. This creates a distributional gap from pretrained MLLMs, making effective reasoning and domain adaptation difficult. We propose Wiki-R1, a data-generation-based curriculum RL framework that constructs a sequence of training distributions aligned with the model’s evolving capability, using controllable curriculum data generation and a curriculum sampling strategy with observation propagation. Experiments on Encyclopedic VQA and InfoSeek show state-of-the-art results, improving accuracy from 35.5% to 37.1% on EVQA and from 40.1% to 44.1% on InfoSeek.",
+    "citation": "@inproceedings{ningwiki, title={Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum}, author={Ning, Shan and Qiu, Longtian and He, Xuming}, booktitle={The Fourteenth International Conference on Learning Representations} }",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://artanic30.github.io/project_pages/WikiR1/"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Knowledge-Based VQA"
+      },
+      {
+        "@type": "Thing",
+        "name": "Multimodal Reasoning"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ShanghaiTech University",
+    "url": "https://www.shanghaitech.edu.cn/",
+    "logo": "https://artanic30.github.io/project_pages/WikiR1/static/images/avater.jpg",
+    "sameAs": [
+      "https://github.com/Artanic30"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Shan Ning<sup>1,3</sup>,</span>
+              <span class="author-block">Longtian Qiu<sup>1</sup>,</span>
+              <span class="author-block">Xuming He<sup>1,2</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">ShanghaiTech University, Shanghai, China<sup>1</sup>,<br>Shanghai Engineering Research Center of Intelligent Vision and Imaging<sup>2</sup>,<br>Lingang Laboratory, Shanghai, China<sup>3</sup> <br>ICLR 2026</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="#" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+
+            <span class="link-block">
+              <a href="#" target="_blank"
+              class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="ai ai-arxiv"></i>
+              </span>
+              <span>arXiv</span>
+            </a>
+          </span>
+
+            <span class="link-block">
+                  <a href="#" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <p style="font-size:18px">🤗</p>
+                  </span>
+              <span>Model</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Knowledge-Based Visual Question Answering (KB-VQA) requires models to answer questions about an image by integrating external knowledge, posing significant challenges due to noisy retrieval and the structured, encyclopedic nature of the knowledge base. These characteristics create a distributional gap from pretrained multimodal large language models (MLLMs), making effective reasoning and domain adaptation difficult in the post-training stage. We propose <em>Wiki-R1</em>, a data-generation-based curriculum reinforcement learning framework that systematically incentivizes reasoning in MLLMs for KB-VQA. Wiki-R1 constructs a sequence of training distributions aligned with the model’s evolving capability, bridging the gap from pretraining to the KB-VQA target distribution. We introduce <em>controllable curriculum data generation</em> and a <em>curriculum sampling strategy</em> that selects informative samples likely to yield non-zero advantages during RL updates. Experiments on Encyclopedic VQA and InfoSeek demonstrate state-of-the-art results, improving accuracy from 35.5% to 37.1% on Encyclopedic VQA and from 40.1% to 44.1% on InfoSeek.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Motivation carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Motivation</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="static/images/assets/tt_teaser_accuracy.jpg" alt="Training accuracy over iterations" loading="lazy" style="max-width: 45%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Training accuracy remains low under vanilla RL on KB-VQA, highlighting the distribution gap.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/tt_teaser_skip_rate.jpg" alt="Zero-advantage ratio" loading="lazy" style="max-width: 45%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            A high proportion of zero-advantage trajectories causes sparse learning signals.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/teaser2.png" alt="Curriculum gap illustration" loading="lazy" style="max-width: 55%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Wiki-R1 narrows the gap by constructing a curriculum of training distributions.
+          </h2>
+        </div>
+      </div>
+
+      <h4 class="is-3">
+        RL for KB-VQA faces severe sparse rewards due to noisy retrieval and the encyclopedic structure of the knowledge base. Wiki-R1 addresses this by creating a learnable curriculum over data difficulty and sampling informative examples that yield effective gradients.
+      </h4>
+    </div>
+  </div>
+</section>
+<!-- End motivation carousel -->
+
+<!-- Method -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Method</h2>
+      <div class="item">
+        <img src="static/images/assets/pipeline2.png" alt="Wiki-R1 pipeline" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+          <b>Wiki-R1 pipeline.</b> Left: controllable curriculum data generation bridges pretraining and KB-VQA distributions. Right: curriculum sampling with observation propagation selects informative samples with non-zero advantages.
+        </h2>
+      </div>
+      <h4 class="is-3">
+        Wiki-R1 manipulates the retriever to generate training data with controllable difficulty, then schedules samples using observed rewards and label propagation across related knowledge-base articles. This joint design stabilizes RL optimization under noisy retrieval.
+      </h4>
+    </div>
+  </div>
+</section>
+<!-- End method -->
+
+<!-- Experiments -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Experiments</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="static/images/assets/compare_ingored_traj_corrected.jpg" alt="Ignored trajectories" loading="lazy" style="max-width: 85%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Observation propagation reduces ignored trajectories and improves training efficiency.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/training_dynamic.jpg" alt="Training dynamics" loading="lazy" style="max-width: 85%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Wiki-R1 achieves stable improvements across EVQA and InfoSeek with curriculum progression.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/accuracy_vs_skip_rate_comparison.jpg" alt="Accuracy vs skip rate" loading="lazy" style="max-width: 70%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Better learning signals correlate with higher accuracy and lower skip rates.
+          </h2>
+        </div>
+      </div>
+
+      <h4 class="is-3">
+        On Encyclopedic VQA and InfoSeek, Wiki-R1 reaches <b>37.1%</b> and <b>44.1%</b> accuracy, respectively, and achieves <b>47.8%</b> on InfoSeek’s Unseen-Question split. It also generalizes well to ViQuAE in zero-shot transfer.
+      </h4>
+    </div>
+  </div>
+</section>
+<!-- End experiments -->
+
+<!-- Visualization -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Visualization</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="static/images/assets/hyper_1.jpg" alt="Hyperparameter sensitivity 1" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Sensitivity analysis of curriculum parameters.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/hyper_2.jpg" alt="Hyperparameter sensitivity 2" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Robustness trends across gap levels.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/seed_1.jpg" alt="Seed robustness 1" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Stability across random seeds (setting A).
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/seed_2.jpg" alt="Seed robustness 2" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Stability across random seeds (setting B).
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End visualization -->
+
+<!--BibTex citation-->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{ningwiki,
+  title={Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum},
+  author={Ning, Shan and Qiu, Longtian and He, Xuming},
+  booktitle={The Fourteenth International Conference on Learning Representations}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation-->
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+  </html>
