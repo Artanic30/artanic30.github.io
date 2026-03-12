@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition">
+  <meta name="description" content="WikiCLIP is a simple and efficient contrastive baseline for open-domain visual entity recognition, combining LLM-based knowledge embeddings with vision-guided adaptation and hard negative synthesis to improve generalization with low latency.">
+  <meta name="keywords" content="open-domain visual entity recognition, contrastive learning, WikiCLIP, CLIP, knowledge-based vision, CVPR">
+  <meta name="author" content="Shan Ning, Longtian Qiu, Jiaxuan Sun, Xuming He">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ShanghaiTech University">
+  <meta property="og:title" content="WikiCLIP">
+  <meta property="og:description" content="A contrastive baseline for open-domain visual entity recognition with strong generalization and efficient inference.">
+  <meta property="og:url" content="https://artanic30.github.io/project_pages/WikiCLIP/">
+  <meta property="og:image" content="https://artanic30.github.io/project_pages/WikiCLIP/static/images/assets/teaser_cvpr26.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="WikiCLIP">
+  <meta property="article:published_time" content="2026-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Shan Ning">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="Visual Entity Recognition">
+  <meta property="article:tag" content="Contrastive Learning">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
+  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
+  <meta name="twitter:title" content="WikiCLIP">
+  <meta name="twitter:description" content="Efficient contrastive VER with strong unseen generalization and low latency.">
+  <meta name="twitter:image" content="https://artanic30.github.io/project_pages/WikiCLIP/static/images/assets/teaser_cvpr26.png">
+  <meta name="twitter:image:alt" content="WikiCLIP - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition">
+  <meta name="citation_author" content="Ning, Shan">
+  <meta name="citation_author" content="Qiu, Longtian">
+  <meta name="citation_author" content="Sun, Jiaxuan">
+  <meta name="citation_author" content="He, Xuming">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="CVPR 2026">
+  <meta name="citation_pdf_url" content="">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>WikiCLIP</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/avater.jpg">
+  <link rel="apple-touch-icon" href="static/images/avater.jpg">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition",
+    "description": "WikiCLIP is a simple and efficient contrastive baseline for open-domain visual entity recognition, combining LLM-based knowledge embeddings with vision-guided adaptation and hard negative synthesis to improve generalization with low latency.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Shan Ning",
+        "affiliation": { "@type": "Organization", "name": "ShanghaiTech University" }
+      },
+      {
+        "@type": "Person",
+        "name": "Longtian Qiu",
+        "affiliation": { "@type": "Organization", "name": "ShanghaiTech University" }
+      },
+      {
+        "@type": "Person",
+        "name": "Jiaxuan Sun",
+        "affiliation": { "@type": "Organization", "name": "ShanghaiTech University" }
+      },
+      {
+        "@type": "Person",
+        "name": "Xuming He",
+        "affiliation": { "@type": "Organization", "name": "ShanghaiTech University" }
+      }
+    ],
+    "datePublished": "2026-01-01",
+    "publisher": { "@type": "Organization", "name": "CVPR" },
+    "url": "https://artanic30.github.io/project_pages/WikiCLIP/",
+    "image": "https://artanic30.github.io/project_pages/WikiCLIP/static/images/assets/teaser_cvpr26.png",
+    "keywords": ["open-domain visual entity recognition", "contrastive learning", "WikiCLIP", "CLIP", "knowledge-based vision"],
+    "abstract": "Open-domain visual entity recognition (VER) seeks to associate images with entities in encyclopedic knowledge bases such as Wikipedia. We propose WikiCLIP, a simple yet effective contrastive framework that leverages LLM-based entity representations with a Vision-Guided Knowledge Adaptor and hard negative synthesis. WikiCLIP achieves strong performance with low latency, improving unseen accuracy on OVEN while being nearly 100x faster than leading generative baselines.",
+    "citation": "BIBTEX_CITATION_HERE",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": { "@type": "WebPage", "@id": "https://artanic30.github.io/project_pages/WikiCLIP/" },
+    "about": [
+      { "@type": "Thing", "name": "Open-domain VER" },
+      { "@type": "Thing", "name": "Contrastive Learning" }
+    ]
+  }
+  </script>
+
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ShanghaiTech University",
+    "url": "https://www.shanghaitech.edu.cn/",
+    "logo": "https://artanic30.github.io/project_pages/WikiCLIP/static/images/avater.jpg",
+    "sameAs": ["https://github.com/Artanic30"]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Shan Ning<sup>1,3</sup>,</span>
+              <span class="author-block">Longtian Qiu<sup>1</sup>,</span>
+              <span class="author-block">Jiaxuan Sun<sup>1</sup>,</span>
+              <span class="author-block">Xuming He<sup>1,2</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">ShanghaiTech University, Shanghai, China<sup>1</sup>,<br>Shanghai Engineering Research Center of Intelligent Vision and Imaging<sup>2</sup>,<br>Lingang Laboratory, Shanghai, China<sup>3</sup> <br>CVPR 2026</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="#" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+
+            <span class="link-block">
+              <a href="#" target="_blank"
+              class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="ai ai-arxiv"></i>
+              </span>
+              <span>arXiv</span>
+            </a>
+          </span>
+
+            <span class="link-block">
+                  <a href="#" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <p style="font-size:18px">🤗</p>
+                  </span>
+              <span>Model</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Open-domain visual entity recognition (VER) seeks to associate images with entities in encyclopedic knowledge bases such as Wikipedia. Recent generative methods demonstrate strong performance but incur high computational costs. We propose WikiCLIP, a simple yet effective contrastive framework that establishes a strong and efficient baseline for open-domain VER. WikiCLIP leverages large language model embeddings as knowledge-rich entity representations and enhances them with a Vision-Guided Knowledge Adaptor (VGKA) that aligns textual semantics with visual cues at the patch level. To further encourage fine-grained discrimination, a Hard Negative Synthesis Mechanism generates visually similar but semantically distinct negatives during training. WikiCLIP significantly outperforms strong baselines on open-domain VER benchmarks and improves unseen accuracy on OVEN while reducing inference latency by nearly 100× compared with the leading generative model.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Motivation carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Motivation</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="static/images/assets/teaser_cvpr26.png" alt="Performance vs latency" loading="lazy" style="max-width: 70%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            WikiCLIP delivers strong unseen accuracy with significantly lower latency than generative baselines.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/teaser2.jpg" alt="Teaser comparison" loading="lazy" style="max-width: 70%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Contrastive retrieval offers a practical alternative for open-domain VER.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="../../paper_source/wikiclip/assets/score_dis.jpg" alt="Score distribution" loading="lazy" style="max-width: 70%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Hard negative synthesis sharpens discrimination across visually similar entities.
+          </h2>
+        </div>
+      </div>
+
+      <h4 class="is-3">
+        Generative VER pipelines are accurate but costly. WikiCLIP revisits contrastive retrieval with knowledge-rich entity embeddings and vision-guided filtering to achieve a strong efficiency–accuracy tradeoff.
+      </h4>
+    </div>
+  </div>
+</section>
+<!-- End motivation carousel -->
+
+<!-- Method -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Method</h2>
+      <div class="item">
+        <img src="static/images/assets/cvpr_pipeline.jpg" alt="WikiCLIP pipeline" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+          <b>WikiCLIP pipeline.</b> Vision-Guided Knowledge Adaptor aligns LLM text embeddings with CLIP patch features to produce entity representations, optimized via contrastive learning with hard negative synthesis.
+        </h2>
+      </div>
+      <h4 class="is-3">
+        WikiCLIP uses a dual-encoder architecture with a frozen CLIP image encoder and an entity encoder that fuses LLM text with visual guidance. Hard negatives are synthesized by swapping text among visually similar entities to train fine-grained discrimination.
+      </h4>
+    </div>
+  </div>
+</section>
+<!-- End method -->
+
+<!-- Experiments -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Experiments</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="static/images/assets/scale.jpg" alt="LLM scale study" loading="lazy" style="max-width: 80%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Scaling LLMs improves unseen accuracy, with diminishing returns beyond 3B.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/seen_ratio.jpg" alt="Seen ratio study" loading="lazy" style="max-width: 80%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            WikiCLIP maintains strong unseen performance even with fewer seen entities.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/length.jpg" alt="Text length study" loading="lazy" style="max-width: 80%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Best performance is achieved around 256 tokens of Wikipedia text.
+          </h2>
+        </div>
+      </div>
+
+      <h4 class="is-3">
+        On OVEN, WikiCLIP-L reaches <b>28.5%</b> unseen accuracy and is nearly <b>100× faster</b> than AutoVER at inference. It also generalizes well to E-VQA and INFOSEEK without dataset-specific fine-tuning.
+      </h4>
+    </div>
+  </div>
+</section>
+<!-- End experiments -->
+
+<!-- Visualization -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Visualization</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="../../paper_source/wikiclip/assets/attn_vis1.png" alt="Attention visualization 1" loading="lazy" style="max-width: 95%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Vision-guided attention highlights entity-relevant text segments.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/attn_vis2.png" alt="Attention visualization 2" loading="lazy" style="max-width: 95%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Visual cues guide selective knowledge extraction.
+          </h2>
+        </div>
+        <div class="item">
+          <img src="static/images/assets/attn_vis3.png" alt="Attention visualization 3" loading="lazy" style="max-width: 95%; height: auto; margin: 0 auto; display: block;"/>
+          <h2 class="subtitle has-text-centered">
+            Fine-grained alignment between visual patches and text tokens.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End visualization -->
+
+<!--BibTex citation-->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{wikiclip2026,
+  title={WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition},
+  author={Ning, Shan and Qiu, Longtian and Sun, Jiaxuan and He, Xuming},
+  booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2026}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation-->
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+  </html>
