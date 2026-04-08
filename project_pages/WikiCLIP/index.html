@@ -233,7 +233,13 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Open-domain visual entity recognition (VER) seeks to associate images with entities in encyclopedic knowledge bases such as Wikipedia. Recent generative methods demonstrate strong performance but incur high computational costs. We propose WikiCLIP, a simple yet effective contrastive framework that establishes a strong and efficient baseline for open-domain VER. WikiCLIP leverages large language model embeddings as knowledge-rich entity representations and enhances them with a Vision-Guided Knowledge Adaptor (VGKA) that aligns textual semantics with visual cues at the patch level. To further encourage fine-grained discrimination, a Hard Negative Synthesis Mechanism generates visually similar but semantically distinct negatives during training. WikiCLIP significantly outperforms strong baselines on open-domain VER benchmarks and improves unseen accuracy on OVEN while reducing inference latency by nearly 100× compared with the leading generative model.
+            Open-domain visual entity recognition (VER) seeks to associate images with entities in encyclopedic knowledge bases such as Wikipedia.
+            Recent generative methods tailored for VER demonstrate strong performance but incur high computational costs, limiting their scalability and practical deployment.
+            In this work, we revisit the contrastive paradigm for VER and introduce <b>WikiCLIP</b>, a simple yet effective framework that establishes a strong and efficient baseline for open-domain VER.
+            WikiCLIP leverages large language model embeddings as knowledge-rich entity representations and enhances them with a <b>Vision-Guided Knowledge Adaptor (VGKA)</b> that aligns textual semantics with visual cues at the patch level.
+            To further encourage fine-grained discrimination, a <b>Hard Negative Synthesis Mechanism</b> generates visually similar but semantically distinct negatives during training.
+            Experimental results on popular open-domain VER benchmarks, such as OVEN, demonstrate that WikiCLIP significantly outperforms strong baselines.
+            Specifically, WikiCLIP achieves a <b>16% improvement</b> on the challenging OVEN unseen set, while reducing inference latency by nearly <b>100×</b> compared with the leading generative model, AutoVER.
           </p>
         </div>
       </div>
@@ -242,8 +248,53 @@
 </section>
 <!-- End paper abstract -->
 
-<!-- Motivation carousel -->
+<!-- Introduction -->
 <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Introduction</h2>
+      <div class="content has-text-justified">
+        <p>
+          Open-domain Visual Entity Recognition (VER) aims to identify specific named entities appearing in an image, where the entity space is drawn from encyclopedic knowledge sources such as Wikipedia.
+          VER serves as a critical component in various real-world applications, including information-seeking Visual Question Answering (VQA), animal species recognition, and news content understanding.
+          Despite rapid advances in multimodal large language models (MLLMs), recent studies reveal that VER remains highly challenging—it demands reasoning over fine-grained encyclopedic knowledge and recognizing entities across an extremely large and long-tailed category space, often encompassing <b>millions of candidates</b>.
+        </p>
+        <p>
+          Recent works on open-domain VER suggest that <b>generative paradigms</b>—which translate query images into text and then perform text-based entity matching against encyclopedic sources—currently outperform contrastive approaches. However, generative methods suffer from several critical limitations:
+        </p>
+        <div class="columns is-centered" style="margin-top: 0.5rem;">
+          <div class="column is-one-third">
+            <div class="notification is-warning is-light">
+              <p class="has-text-weight-bold">⏱️ High Inference Latency</p>
+              <p>Autoregressive decoding requires sequential token generation, causing significant computational overhead compared to parallelizable contrastive encoders.</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="notification is-danger is-light">
+              <p class="has-text-weight-bold">🔍 Limited Generalization</p>
+              <p>Generative VER models often fail to recognize entities not observed during VER training, limiting their open-domain applicability.</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="notification is-info is-light">
+              <p class="has-text-weight-bold">💰 High Computational Cost</p>
+              <p>They typically rely on massive architectures (e.g., AutoVER 13B) and large-scale paired datasets (e.g., REW-47M image–text pairs).</p>
+            </div>
+          </div>
+        </div>
+        <p>
+          In this work, we revisit the contrastive paradigm for VER and argue that it remains a powerful yet underexplored alternative.
+          Our key insight is that <b>LLM embeddings can encode rich encyclopedic semantics</b> when provided with textual descriptions. By guiding these representations with fine-grained visual cues, we can extract discriminative, entity-level embeddings through lightweight contrastive training.
+          WikiCLIP thus combines the generalization ability of LLM-based representations with the efficiency and scalability of contrastive learning.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End introduction -->
+
+<!-- Motivation carousel -->
+<section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3">Motivation</h2>
@@ -251,20 +302,23 @@
         <div class="item">
           <img src="static/images/assets/teaser_cvpr26.png" alt="Performance vs latency" loading="lazy" style="max-width: 70%; height: auto; margin: 0 auto; display: block;"/>
           <h2 class="subtitle has-text-centered">
-            WikiCLIP delivers strong unseen accuracy with significantly lower latency than generative baselines.
+            <b>Performance comparison.</b> WikiCLIP delivers state-of-the-art OVEN unseen accuracy while maintaining low inference latency.
           </h2>
         </div>
         <div class="item">
           <img src="static/images/assets/teaser2.jpg" alt="Teaser comparison" loading="lazy" style="max-width: 70%; height: auto; margin: 0 auto; display: block;"/>
           <h2 class="subtitle has-text-centered">
-            Contrastive retrieval offers a practical alternative for open-domain VER.
+            Contrastive retrieval offers a practical and efficient alternative for open-domain VER.
           </h2>
         </div>
       </div>
 
-      <h4 class="is-3">
-        Generative VER pipelines are accurate but costly. WikiCLIP revisits contrastive retrieval with knowledge-rich entity embeddings and vision-guided filtering to achieve a strong efficiency–accuracy tradeoff.
-      </h4>
+      <div class="content has-text-justified" style="margin-top: 1.5rem;">
+        <p>
+          Generative VER pipelines are accurate but costly. When deployed as intermediate modules within larger pipelines, they can cause slow inference, reduced adaptability, and cumulative error propagation in downstream tasks.
+          WikiCLIP revisits contrastive retrieval with knowledge-rich entity embeddings and vision-guided filtering to achieve a strong <b>efficiency–accuracy tradeoff</b>: <b>14.49 ms</b> vs. <b>1569 ms</b> when compared with AutoVER (13B), a nearly <b>100× speedup</b>.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -278,52 +332,236 @@
       <div class="item">
         <img src="static/images/assets/cvpr_pipeline.jpg" alt="WikiCLIP pipeline" loading="lazy"/>
         <h2 class="subtitle has-text-centered">
-          <b>WikiCLIP pipeline.</b> Vision-Guided Knowledge Adaptor aligns LLM text embeddings with CLIP patch features to produce entity representations, optimized via contrastive learning with hard negative synthesis.
+          <b>The Overall Pipeline of WikiCLIP.</b> Given an entity's Wikipedia document, we use CLIP to extract patch-level features from the entity image and an LLM to obtain embeddings of its encyclopedic text description. The Vision-Guided Knowledge Adaptor selects informative text tokens guided by visual features to produce a knowledge-aware entity representation. Hard negative synthesis generates challenging negatives by swapping entity text descriptions.
         </h2>
       </div>
-      <h4 class="is-3">
-        WikiCLIP uses a dual-encoder architecture with a frozen CLIP image encoder and an entity encoder that fuses LLM text with visual guidance. Hard negatives are synthesized by swapping text among visually similar entities to train fine-grained discrimination.
-      </h4>
+
+      <div class="columns is-centered" style="margin-top: 2rem;">
+        <div class="column is-half">
+          <div class="box">
+            <h4 class="title is-5">🔬 Vision-Guided Knowledge Adaptor (VGKA)</h4>
+            <div class="content has-text-justified">
+              <p>
+                WikiCLIP employs a <b>dual-encoder architecture</b> consisting of a frozen CLIP image encoder for query images and a trainable entity encoder incorporating the VGKA module.
+              </p>
+              <p>
+                The VGKA uses CLIP to extract <b>patch-level visual features</b> P<sub>e</sub> ∈ ℝ<sup>N<sub>p</sub>×D</sup> from entity images, serving as visual guidance. An LLM encodes the entity's textual description into token-level embeddings, which are linearly projected to match the visual feature dimension, yielding T<sub>t</sub> ∈ ℝ<sup>N<sub>t</sub>×D</sup>.
+              </p>
+              <p>
+                A <b>multi-head cross-attention</b> operation then selects discriminative text information guided by visual features: <b>V' = FA(P<sub>e</sub>, T<sub>t</sub>, T<sub>t</sub>)</b>, followed by mean pooling to obtain the final entity embedding <b>v</b> ∈ ℝ<sup>D</sup>. This allows the model to focus on entity-relevant semantics within lengthy texts while suppressing irrelevant information.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="box">
+            <h4 class="title is-5">⚡ Hard Negative Synthesis</h4>
+            <div class="content has-text-justified">
+              <p>
+                To improve fine-grained entity discrimination, we introduce a <b>hard negative synthesis strategy</b> that creates visually similar yet semantically mismatched negatives.
+              </p>
+              <p>
+                <b>Step 1 — Visual Clustering:</b> We leverage CLIP visual features to construct mini-batches where query images are visually similar, grouping entities that share visual appearance.
+              </p>
+              <p>
+                <b>Step 2 — Text Swapping:</b> For each sample in the visually clustered batch, we generate N<sub>sync</sub> synthetic entities composed of the original entity image paired with <b>randomly selected textual descriptions</b> from other entities in the mini-batch.
+              </p>
+              <p>
+                These synthetic hard negatives <b>selectively replace easy negatives</b> (those with low cosine similarity to the query), forcing the model to capture fine-grained textual distinctions that define entity identity. Only when both steps are combined does the model learn effective fine-grained discrimination.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content has-text-justified" style="margin-top: 1rem;">
+        <p>
+          <b>Efficient Inference:</b> All entity embeddings in the knowledge base can be <b>precomputed and stored offline</b>. At inference time, recognition requires only a single forward pass through the CLIP image encoder and a FAISS similarity search—unlike generative approaches that rely on expensive autoregressive decoding. This yields an inference latency of just <b>14.49 ms</b> per query.
+        </p>
+      </div>
     </div>
   </div>
 </section>
 <!-- End method -->
 
-<!-- Experiments -->
+<!-- Main Results on OVEN -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Main Results on OVEN</h2>
+      <div class="content has-text-justified">
+        <p>WikiCLIP achieves <b>31.6 HM</b> on OVEN — nearly 3× the previous contrastive SOTA (CLIP2CLIP, 11.5) — and surpasses GiT-Large trained on REW-47M with only <b>1/5 of the tunable parameters</b>.</p>
+      </div>
+      <div class="table-container" style="overflow-x:auto;">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size:0.88rem;">
+          <thead><tr><th>Category</th><th>Methods</th><th>Extra Dataset</th><th>Latency</th><th>TFLOPS</th><th>Unseen</th><th>Seen</th><th>HM</th></tr></thead>
+          <tbody>
+            <tr><td colspan="8" style="background:#fffde7;text-align:center;font-weight:600"><em>Zero Shot</em></td></tr>
+            <tr><td rowspan="2">Zero Shot</td><td>GPT5-nano</td><td>—</td><td>—</td><td>—</td><td>13.0</td><td>23.7</td><td>16.8</td></tr>
+            <tr><td>GPT4V</td><td>—</td><td>—</td><td>—</td><td><b>19.3</b></td><td><b>29.8</b></td><td><b>23.4</b></td></tr>
+            <tr><td colspan="8" style="background:#fffde7;text-align:center;font-weight:600"><em>Generative</em></td></tr>
+            <tr><td rowspan="8">Generative</td><td>PaLI-3B</td><td>—</td><td>—</td><td>—</td><td>6.6</td><td>21.6</td><td>10.1</td></tr>
+            <tr><td>PaLI-17B</td><td>—</td><td>—</td><td>—</td><td>12.4</td><td>30.6</td><td>17.6</td></tr>
+            <tr><td>GiT-Large*</td><td>WebLI-100M</td><td>83.95</td><td>3.06</td><td>4.2</td><td>13.7</td><td>6.5</td></tr>
+            <tr><td>GER-ALD*</td><td>Entity-WebLI</td><td>83.95</td><td>3.06</td><td>17.7</td><td>31.5</td><td>22.7</td></tr>
+            <tr><td>GiT-Large*</td><td>Entity-WebLI</td><td>83.95</td><td>3.06</td><td>16.4</td><td>25.9</td><td>20.1</td></tr>
+            <tr><td>GiT-Large*</td><td>REW-47M</td><td>83.95</td><td>3.06</td><td><b>25.1</b></td><td>36.0</td><td>29.6</td></tr>
+            <tr><td>AutoVER 7B</td><td>—</td><td>993</td><td>19.47</td><td>21.7</td><td>61.5</td><td>32.1</td></tr>
+            <tr><td>AutoVER 13B</td><td>—</td><td>1569</td><td>24.74</td><td>24.5</td><td><b>63.6</b></td><td><b>35.6</b></td></tr>
+            <tr><td colspan="8" style="background:#e3f2fd;text-align:center;font-weight:600"><em>Contrastive</em></td></tr>
+            <tr><td rowspan="5">Contrastive</td><td>CLIP ViTL14</td><td>—</td><td><b>11.69</b></td><td><b>0.07</b></td><td>5.4</td><td>5.3</td><td>5.4</td></tr>
+            <tr><td>CLIPFusion</td><td>—</td><td>15.93</td><td>0.08</td><td>4.8</td><td>33.6</td><td>8.4</td></tr>
+            <tr><td>CLIP2CLIP</td><td>—</td><td>13.84</td><td>0.08</td><td>10.5</td><td>12.6</td><td>11.5</td></tr>
+            <tr style="background:#e8f5e9"><td><b>WikiCLIP-S</b></td><td>—</td><td>14.49</td><td>1.93</td><td>27.0</td><td><b>36.8</b></td><td>31.1</td></tr>
+            <tr style="background:#e8f5e9"><td><b>WikiCLIP-L</b></td><td>—</td><td>14.49</td><td>1.93</td><td><b>28.5</b></td><td>35.5</td><td><b>31.6</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="has-text-centered" style="font-size:0.85rem;color:#666;"><b>Table 1.</b> Comparison with State-of-the-Art on the OVEN Entity Set. * denotes test-split results. Latency measured on A100.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Generalization -->
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">Experiments</h2>
-      <div class="item">
-        <img src="static/images/assets/main_res.jpg" alt="Main results" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
-        <h2 class="subtitle has-text-centered">
-          <b>Main results on OVEN benchmark.</b> WikiCLIP achieves strong performance with significantly lower latency.
-        </h2>
+      <h2 class="title is-3">Generalization on E-VQA &amp; INFOSEEK</h2>
+      <div class="content has-text-justified">
+        <p>WikiCLIP achieves <b>SOTA on INFOSEEK</b> without fine-tuning on its training set, and competitive results on E-VQA compared to Echosight (which is explicitly fine-tuned).</p>
       </div>
-      <div id="results-carousel" class="carousel results-carousel" style="margin-top: 2rem;">
-        <div class="item">
-          <img src="static/images/assets/scale.jpg" alt="LLM scale study" loading="lazy" style="max-width: 80%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Scaling LLMs improves unseen accuracy, with diminishing returns beyond 3B.
-          </h2>
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size:0.88rem;">
+            <thead><tr style="background:#fffde7"><th colspan="5" style="text-align:center">INFOSEEK</th></tr><tr><th>Methods</th><th>FT</th><th>Unseen</th><th>Seen</th><th>Overall</th></tr></thead>
+            <tbody>
+              <tr><td>DPR</td><td>In-house</td><td>—</td><td>—</td><td>29.6</td></tr>
+              <tr><td>CLIP I2T*</td><td>—</td><td>—</td><td>—</td><td>32.0</td></tr>
+              <tr><td>CLIP I2I*</td><td>—</td><td>45.6</td><td>46.5</td><td>45.9</td></tr>
+              <tr><td>Echosight</td><td>E-VQA</td><td>—</td><td>—</td><td>53.2</td></tr>
+              <tr style="background:#e8f5e9"><td><b>WikiCLIP-S</b></td><td>OVEN</td><td>58.5</td><td>69.3</td><td>61.2</td></tr>
+              <tr style="background:#e8f5e9"><td><b>WikiCLIP-L</b></td><td>OVEN</td><td><b>60.3</b></td><td><b>69.6</b></td><td><b>62.7</b></td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="item">
-          <img src="static/images/assets/seen_ratio.jpg" alt="Seen ratio study" loading="lazy" style="max-width: 80%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            WikiCLIP maintains strong unseen performance even with fewer seen entities.
-          </h2>
-        </div>
-        <div class="item">
-          <img src="static/images/assets/length.jpg" alt="Text length study" loading="lazy" style="max-width: 80%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Best performance is achieved around 256 tokens of Wikipedia text.
-          </h2>
+        <div class="column is-half">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size:0.88rem;">
+            <thead><tr style="background:#fffde7"><th colspan="5" style="text-align:center">E-VQA</th></tr><tr><th>Methods</th><th>FT</th><th>Unseen</th><th>Seen</th><th>Overall</th></tr></thead>
+            <tbody>
+              <tr><td>CLIP I2T*</td><td>—</td><td>—</td><td>—</td><td>3.3</td></tr>
+              <tr><td>CLIP I2I*</td><td>—</td><td>14.6</td><td>10.6</td><td>13.3</td></tr>
+              <tr><td>Echosight</td><td>E-VQA</td><td>—</td><td>—</td><td>36.5</td></tr>
+              <tr><td>Google Lens</td><td>—</td><td>—</td><td>—</td><td><b>47.4</b></td></tr>
+              <tr style="background:#e8f5e9"><td><b>WikiCLIP-S</b></td><td>OVEN</td><td>27.7</td><td><b>39.9</b></td><td>30.7</td></tr>
+              <tr style="background:#e8f5e9"><td><b>WikiCLIP-L</b></td><td>OVEN</td><td><b>30.7</b></td><td>35.6</td><td>31.9</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <h4 class="is-3">
-        On OVEN, WikiCLIP-L reaches <b>28.5%</b> unseen accuracy and is nearly <b>100× faster</b> than AutoVER at inference. It also generalizes well to E-VQA and INFOSEEK without dataset-specific fine-tuning.
-      </h4>
+<!-- Efficiency -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Efficiency Comparison</h2>
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <div class="content has-text-justified">
+            <ul>
+              <li>Only <b>0.08B tunable parameters</b> — no gradients through frozen LLM/CLIP.</li>
+              <li>WikiCLIP-L: <b>23 h</b> on 8×A100 vs. AutoVER 13B: <b>247 h</b>.</li>
+              <li>Trained on <b>1.9M</b> samples, outperforms GiT-Large trained on <b>47M</b> samples.</li>
+              <li>Inference: <b>14.49 ms</b> vs. 1569 ms (AutoVER 13B), <b>108× faster</b>.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="column is-half">
+          <table class="table is-bordered is-hoverable is-fullwidth" style="font-size:0.88rem;">
+            <thead><tr><th>Method</th><th>Params</th><th>Train Time</th><th>Latency</th></tr></thead>
+            <tbody>
+              <tr><td>AutoVER 13B</td><td>13B</td><td>247 h</td><td>1569 ms</td></tr>
+              <tr><td>GiT-Large (REW)</td><td>0.4B</td><td>—</td><td>83.95 ms</td></tr>
+              <tr style="background:#e8f5e9"><td><b>WikiCLIP-S</b></td><td><b>0.08B</b></td><td>19 h</td><td><b>14.49 ms</b></td></tr>
+              <tr style="background:#e8f5e9"><td><b>WikiCLIP-L</b></td><td><b>0.08B</b></td><td>23 h</td><td><b>14.49 ms</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ablation Study -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Ablation Study</h2>
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <h5 class="title is-5">Entity Representation &amp; Training Strategy</h5>
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size:0.86rem;">
+            <thead><tr><th>Image</th><th>Text</th><th>Cluster</th><th>Synth</th><th>Unseen</th><th>Seen</th><th>Overall</th></tr></thead>
+            <tbody>
+              <tr><td colspan="7" style="background:#fffde7;text-align:center;font-style:italic">Entity Representation</td></tr>
+              <tr><td>✓</td><td></td><td></td><td></td><td>39.5</td><td>60.4</td><td>44.8</td></tr>
+              <tr><td></td><td>✓</td><td></td><td></td><td>47.9</td><td>59.1</td><td>50.8</td></tr>
+              <tr><td>✓</td><td>✓</td><td></td><td></td><td>56.8</td><td>68.0</td><td>59.7</td></tr>
+              <tr><td colspan="7" style="background:#fffde7;text-align:center;font-style:italic">Training Strategy</td></tr>
+              <tr><td>✓</td><td>✓</td><td>✓</td><td></td><td>56.8</td><td>68.2</td><td>59.7</td></tr>
+              <tr><td>✓</td><td>✓</td><td></td><td>✓</td><td>57.0</td><td>64.6</td><td>58.9</td></tr>
+              <tr style="background:#e8f5e9"><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td><b>58.5</b></td><td><b>69.3</b></td><td><b>61.2</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="column is-half">
+          <h5 class="title is-5">Choice of Encoders</h5>
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size:0.86rem;">
+            <thead><tr><th>Text Encoder</th><th>Visual Encoder</th><th>Unseen</th><th>Seen</th><th>Overall</th></tr></thead>
+            <tbody>
+              <tr><td>EVA-CLIP 8B</td><td>CLIP ViTL</td><td>26.5</td><td>54.6</td><td>33.6</td></tr>
+              <tr><td>LLaMa3.2 1B</td><td>CLIP ViTL</td><td>39.8</td><td>46.9</td><td>41.6</td></tr>
+              <tr><td>EVA-CLIP 8B</td><td>EVA-CLIP 8B</td><td>56.3</td><td>62.4</td><td>58.1</td></tr>
+              <tr style="background:#e8f5e9"><td><b>LLaMa3.2 1B</b></td><td><b>EVA-CLIP 8B</b></td><td><b>58.5</b></td><td><b>69.3</b></td><td><b>61.2</b></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:0.85rem;color:#666;">LLM text encoders outperform CLIP text encoders due to richer world knowledge and longer context support.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Analysis -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Analysis &amp; Discussion</h2>
+      <div class="columns is-centered" style="margin-top:1rem;">
+        <div class="column is-one-third">
+          <div class="box" style="height:100%;">
+            <h5 class="title is-5">📏 Wiki Text Length</h5>
+            <img src="static/images/assets/length.jpg" alt="Text length" loading="lazy" style="max-width:100%;height:auto;display:block;margin:0 auto;"/>
+            <p class="has-text-justified" style="margin-top:0.5rem;font-size:0.9rem;">Performance peaks at <b>256 tokens</b>. Excessive text introduces noise — not all Wikipedia text benefits recognition.</p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box" style="height:100%;">
+            <h5 class="title is-5">📊 LLM Scale Effect</h5>
+            <img src="static/images/assets/scale.jpg" alt="LLM scale" loading="lazy" style="max-width:100%;height:auto;display:block;margin:0 auto;"/>
+            <p class="has-text-justified" style="margin-top:0.5rem;font-size:0.9rem;">Scaling LLMs improves unseen accuracy, but gains between <b>3B and 8B</b> are marginal.</p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box" style="height:100%;">
+            <h5 class="title is-5">🎯 Seen Category Ratio</h5>
+            <img src="static/images/assets/seen_ratio.jpg" alt="Seen ratio" loading="lazy" style="max-width:100%;height:auto;display:block;margin:0 auto;"/>
+            <p class="has-text-justified" style="margin-top:0.5rem;font-size:0.9rem;">WikiCLIP achieves <b>56% unseen acc</b> with only 700 seen entities (10%), vs. 58% with full 7,943.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -334,19 +572,56 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3">Visualization</h2>
+
+      <h4 class="title is-4" style="margin-top:1.5rem;">Vision-Guided Knowledge Selection</h4>
+      <div class="content has-text-justified">
+        <p>We visualize the attention map of each text token guided by patch-level vision signals. The top-32 text segments with highest attention are highlighted, showing that the VGKA successfully detects discriminative entity features.</p>
+      </div>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item">
-          <img src="static/images/assets/attn_vis2.png" alt="Attention visualization 2" loading="lazy" style="max-width: 95%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Visual cues guide selective knowledge extraction.
-          </h2>
+          <img src="static/images/assets/attn_vis1.png" alt="Attention visualization 1" loading="lazy" style="max-width:95%;height:auto;margin:0 auto;display:block;"/>
+          <h2 class="subtitle has-text-centered">Vision-guided attention highlights entity-discriminative text tokens.</h2>
         </div>
         <div class="item">
-          <img src="static/images/assets/attn_vis3.png" alt="Attention visualization 3" loading="lazy" style="max-width: 95%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Fine-grained alignment between visual patches and text tokens.
-          </h2>
+          <img src="static/images/assets/attn_vis2.png" alt="Attention visualization 2" loading="lazy" style="max-width:95%;height:auto;margin:0 auto;display:block;"/>
+          <h2 class="subtitle has-text-centered">Visual cues guide selective knowledge extraction from lengthy descriptions.</h2>
         </div>
+        <div class="item">
+          <img src="static/images/assets/attn_vis3.png" alt="Attention visualization 3" loading="lazy" style="max-width:95%;height:auto;margin:0 auto;display:block;"/>
+          <h2 class="subtitle has-text-centered">Fine-grained alignment between visual patches and text tokens.</h2>
+        </div>
+      </div>
+
+      <h4 class="title is-4" style="margin-top:2rem;">Top-K Retrieval Results</h4>
+      <div class="content has-text-justified">
+        <p>Qualitative top-5 retrieval results show WikiCLIP successfully resolves visually ambiguous cases by leveraging textual descriptions for precise entity recognition.</p>
+      </div>
+      <div class="item">
+        <img src="static/images/assets/vis_topk.jpg" alt="Top-K retrieval results" loading="lazy" style="max-width:95%;height:auto;margin:0 auto;display:block;"/>
+        <h2 class="subtitle has-text-centered"><b>Top-5 Retrieval Visualization.</b> WikiCLIP retrieves the correct entity even among visually similar candidates.</h2>
+      </div>
+
+      <h4 class="title is-4" style="margin-top:2rem;">Hard Negative Visualization</h4>
+      <div class="content has-text-justified">
+        <p>We visualize entity representations with and without hard negative synthesis using t-SNE. Hard negative synthesis leads to more <b>sparse and discriminative</b> representations, confirmed by higher Silhouette Scores.</p>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <img src="static/images/assets/cluster.jpg" alt="Cluster visualization" loading="lazy" style="max-width:100%;height:auto;margin:0 auto;display:block;"/>
+        </div>
+        <div class="column is-half">
+          <img src="static/images/assets/score_dis.jpg" alt="Score distribution" loading="lazy" style="max-width:100%;height:auto;margin:0 auto;display:block;"/>
+        </div>
+      </div>
+      <p class="has-text-centered" style="font-size:0.85rem;color:#666;"><b>Hard Negative Visualization.</b> (Left) t-SNE of entity representations. (Right) Silhouette score comparison.</p>
+
+      <h4 class="title is-4" style="margin-top:2rem;">Error Case Analysis</h4>
+      <div class="content has-text-justified">
+        <p>We identify three main failure types: (1) <b>Wrong but Relevant</b> — predicted entity is semantically related but incorrect; (2) <b>Unrelated Ground Truth</b> — GT entity not directly present in the image; (3) <b>Granularity Mismatch</b> — prediction at incorrect specificity level.</p>
+      </div>
+      <div class="item">
+        <img src="static/images/assets/error_case.jpg" alt="Error case analysis" loading="lazy" style="max-width:95%;height:auto;margin:0 auto;display:block;"/>
+        <h2 class="subtitle has-text-centered"><b>Error Case Visualization.</b> Three main types of prediction errors on OVEN.</h2>
       </div>
     </div>
   </div>
@@ -354,7 +629,7 @@
 <!-- End visualization -->
 
 <!--BibTex citation-->
-  <!-- <section class="section" id="BibTeX">
+  <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <div class="bibtex-header">
         <h2 class="title">BibTeX</h2>
@@ -370,8 +645,10 @@
   year={2026}
 }</code></pre>
     </div>
-</section> -->
+</section>
 <!--End BibTex citation-->
+
+  </main>
 
   <footer class="footer">
   <div class="container">
