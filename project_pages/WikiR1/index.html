@@ -135,7 +135,7 @@
     "url": "https://artanic30.github.io/project_pages/WikiR1/",
     "image": "https://artanic30.github.io/project_pages/WikiR1/static/images/assets/teaser.jpg",
     "keywords": ["KB-VQA", "multimodal reasoning", "curriculum reinforcement learning", "retrieval-augmented generation"],
-    "abstract": "Knowledge-Based Visual Question Answering (KB-VQA) requires models to answer questions about an image by integrating external knowledge, posing significant challenges due to noisy retrieval and the structured, encyclopedic nature of the knowledge base. This creates a distributional gap from pretrained MLLMs, making effective reasoning and domain adaptation difficult. We propose Wiki-R1, a data-generation-based curriculum RL framework that constructs a sequence of training distributions aligned with the model’s evolving capability, using controllable curriculum data generation and a curriculum sampling strategy with observation propagation. Experiments on Encyclopedic VQA and InfoSeek show state-of-the-art results, improving accuracy from 35.5% to 37.1% on EVQA and from 40.1% to 44.1% on InfoSeek.",
+    "abstract": "Knowledge-Based Visual Question Answering (KB-VQA) requires models to answer questions about an image by integrating external knowledge, posing significant challenges due to noisy retrieval and the structured, encyclopedic nature of the knowledge base. This creates a distributional gap from pretrained MLLMs, making effective reasoning and domain adaptation difficult. We propose Wiki-R1, a data-generation-based curriculum RL framework that constructs a sequence of training distributions aligned with the model's evolving capability, using controllable curriculum data generation and a curriculum sampling strategy with observation propagation. Experiments on Encyclopedic VQA and InfoSeek show state-of-the-art results, improving accuracy from 35.5% to 37.1% on EVQA and from 40.1% to 44.1% on InfoSeek.",
     "citation": "@inproceedings{ningwiki, title={Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum}, author={Ning, Shan and Qiu, Longtian and He, Xuming}, booktitle={The Fourteenth International Conference on Learning Representations} }",
     "isAccessibleForFree": true,
     "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -250,7 +250,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Knowledge-Based Visual Question Answering (KB-VQA) requires models to answer questions about an image by integrating external knowledge, posing significant challenges due to noisy retrieval and the structured, encyclopedic nature of the knowledge base. These characteristics create a distributional gap from pretrained multimodal large language models (MLLMs), making effective reasoning and domain adaptation difficult in the post-training stage. We propose <em>Wiki-R1</em>, a data-generation-based curriculum reinforcement learning framework that systematically incentivizes reasoning in MLLMs for KB-VQA. Wiki-R1 constructs a sequence of training distributions aligned with the model’s evolving capability, bridging the gap from pretraining to the KB-VQA target distribution. We introduce <em>controllable curriculum data generation</em> and a <em>curriculum sampling strategy</em> that selects informative samples likely to yield non-zero advantages during RL updates. Experiments on Encyclopedic VQA and InfoSeek demonstrate state-of-the-art results, improving accuracy from 35.5% to 37.1% on Encyclopedic VQA and from 40.1% to 44.1% on InfoSeek.
+            Knowledge-Based Visual Question Answering (KB-VQA) requires models to answer questions about an image by integrating external knowledge, posing significant challenges due to noisy retrieval and the structured, encyclopedic nature of the knowledge base. These characteristics create a distributional gap from pretrained multimodal large language models (MLLMs), making effective reasoning and domain adaptation difficult in the post-training stage. We propose <em>Wiki-R1</em>, a data-generation-based curriculum reinforcement learning framework that systematically incentivizes reasoning in MLLMs for KB-VQA. Wiki-R1 constructs a sequence of training distributions aligned with the model's evolving capability, bridging the gap from pretraining to the KB-VQA target distribution. We introduce <em>controllable curriculum data generation</em> and a <em>curriculum sampling strategy</em> that selects informative samples likely to yield non-zero advantages during RL updates. Experiments on Encyclopedic VQA and InfoSeek demonstrate state-of-the-art results, improving accuracy from 35.5% to 37.1% on Encyclopedic VQA and from 40.1% to 44.1% on InfoSeek.
           </p>
         </div>
       </div>
@@ -259,128 +259,339 @@
 </section>
 <!-- End paper abstract -->
 
+<!-- Introduction -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          <p>
+            Knowledge-Based Visual Question Answering (KB-VQA) is a challenging multimodal task that requires answering questions about an image by integrating external knowledge. A widely adopted approach is the <b>Retrieval-Augmented Generation (RAG)</b> framework: a retriever first fetches relevant knowledge passages from a large-scale knowledge base (e.g., Wikipedia), and a generator then produces an answer conditioned on this context.
+          </p>
+          <p>
+            However, the noise in the retrieval system is inherent, and the knowledge base typically consists of structured, encyclopedic information. The model must not only reason over <b>noisy and imperfect external evidence</b> but also comprehend retrieved information presented in a structured, encyclopedic form largely unseen during pretraining. These characteristics position KB-VQA as a challenging downstream task for pretrained MLLMs, one that demands <b>robust reasoning ability and effective domain transfer</b>.
+          </p>
+          <p>
+            Prior work has pursued two main directions: (1) improving retrieval quality, though retrieval remains inherently noisy; (2) enhancing reasoning to handle imperfect retrieval. Early efforts primarily relied on supervised fine-tuning (SFT), which may have limited reasoning robustness. More recent RL methods such as GRPO and DAPO have shown promise in general RAG settings, but their effectiveness in tasks requiring both <b>multimodal reasoning</b> and <b>cross-domain adaptation</b>, such as KB-VQA, remains largely unexplored.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End introduction -->
+
 <!-- Motivation carousel -->
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">Motivation</h2>
+      <h2 class="title is-3">Motivation: The Sparse Reward Problem</h2>
+      <div class="content has-text-justified" style="max-width: 960px; margin: 0 auto 1.5rem auto;">
+        <p>
+          We apply the popular RL algorithm DAPO to KB-VQA and observe that <b>over 80% of samples exhibit zero advantages</b> during training, with overall training accuracy around only <b>10%</b>. This indicates a <b>severe sparse reward problem</b> exacerbated by the distributional gap between pretraining and KB-VQA.
+          Experiments with ground-truth retrieval confirm that <b>retrieval noise is a significant contributing factor</b> to the sparse reward and ineffective training.
+        </p>
+      </div>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item">
           <img src="static/images/assets/tt_teaser_accuracy.jpg" alt="Training accuracy over iterations" loading="lazy" style="max-width: 45%; height: auto; margin: 0 auto; display: block;"/>
           <h2 class="subtitle has-text-centered">
-            Training accuracy remains low under vanilla RL on KB-VQA, highlighting the distribution gap.
+            <b>(a)</b> Training accuracy remains low (~10%) under vanilla RL, highlighting the distribution gap.
           </h2>
         </div>
         <div class="item">
           <img src="static/images/assets/tt_teaser_skip_rate.jpg" alt="Zero-advantage ratio" loading="lazy" style="max-width: 45%; height: auto; margin: 0 auto; display: block;"/>
           <h2 class="subtitle has-text-centered">
-            A high proportion of zero-advantage trajectories causes sparse learning signals.
+            <b>(b)</b> Over 80% of trajectories have zero advantage, causing sparse learning signals.
           </h2>
         </div>
         <div class="item">
           <img src="static/images/assets/teaser2.png" alt="Curriculum gap illustration" loading="lazy" style="max-width: 55%; height: auto; margin: 0 auto; display: block;"/>
           <h2 class="subtitle has-text-centered">
-            Wiki-R1 narrows the gap by constructing a curriculum of training distributions.
+            <b>(c)</b> Wiki-R1 narrows the gap via a curriculum of training distributions with progressively reduced discrepancies.
           </h2>
         </div>
       </div>
-
-      <h4 class="is-3">
-        RL for KB-VQA faces severe sparse rewards due to noisy retrieval and the encyclopedic structure of the knowledge base. Wiki-R1 addresses this by creating a learnable curriculum over data difficulty and sampling informative examples that yield effective gradients.
-      </h4>
     </div>
   </div>
 </section>
 <!-- End motivation carousel -->
 
 <!-- Method -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Method</h2>
-      <div class="item">
-        <img src="static/images/assets/pipeline2.png" alt="Wiki-R1 pipeline" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          <b>Wiki-R1 pipeline.</b> Left: controllable curriculum data generation bridges pretraining and KB-VQA distributions. Right: curriculum sampling with observation propagation selects informative samples with non-zero advantages.
-        </h2>
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Method</h2>
+    <div class="content has-text-justified" style="margin-bottom: 1.5rem;">
+      <p>
+        We propose <em>Wiki-R1</em>, a data-generation-based curriculum RL framework that constructs a sequence of training distributions adaptively aligned with the model's evolving capability. Unlike conventional curriculum learning, we <b>generate training data with controllable difficulty</b> rather than selecting from a fixed dataset. The framework consists of two tightly coupled components:
+      </p>
+    </div>
+    <div class="item" style="margin-bottom: 1.5rem;">
+      <img src="static/images/assets/pipeline2.png" alt="Wiki-R1 pipeline" loading="lazy"/>
+      <h2 class="subtitle has-text-centered">
+        <b>Wiki-R1 pipeline.</b> Left: controllable curriculum data generation bridges pretraining and KB-VQA distributions. Right: curriculum sampling with observation propagation selects informative samples with non-zero advantages.
+      </h2>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <h3 class="title is-4">① Controllable Curriculum Data Generation</h3>
+        <div class="content has-text-justified">
+          <p>We manipulate the retriever to generate training samples with controllable difficulty via a discrete <b>gap level <em>g</em> ∈ {0, 1, …, G}</b>:</p>
+          <ul>
+            <li><b>Easiest (g=0):</b> Only the ground-truth snippet (k=1, γ=1), closest to pretraining distribution.</li>
+            <li><b>Intermediate (1 &lt; g &lt; G):</b> k=g candidates with ground truth included, introducing increasing noise.</li>
+            <li><b>Hardest (g=G):</b> No guaranteed ground truth (γ=0), fully aligned with inference-time distribution.</li>
+          </ul>
+          <p><b>Gap-Level Schedule:</b> A sliding window of recent <em>w</em> samples tracks training accuracy. When the moving average exceeds threshold <em>τ</em>, we promote g → g+1, ensuring gradual exposure to harder distributions.</p>
+        </div>
       </div>
-      <h4 class="is-3">
-        Wiki-R1 manipulates the retriever to generate training data with controllable difficulty, then schedules samples using observed rewards and label propagation across related knowledge-base articles. This joint design stabilizes RL optimization under noisy retrieval.
-      </h4>
+      <div class="column is-half">
+        <h3 class="title is-4">② Curriculum Sampling with Observation Propagation</h3>
+        <div class="content has-text-justified">
+          <p>Generated samples may not always match the intended difficulty. We introduce a <b>curriculum sampling strategy</b> that selects samples likely to yield non-zero advantages. Samples with training accuracy near <b>0.5</b> provide the strongest gradient signal.</p>
+          <p><b>Observation Propagation:</b> Observed rewards are extremely sparse. We leverage the insight that VQA sample correlations relate to their associated KB articles. We construct a <b>label propagation graph</b> with edge weights reflecting KB article similarity, then propagate observed accuracies to unobserved samples:</p>
+          <p style="text-align: center; font-style: italic;">A<sub>new</sub> = α · K · A<sub>pred</sub> + (1−α) · A</p>
+          <p>This ensures effective curriculum sampling even under sparse observations.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 <!-- End method -->
 
-<!-- Experiments -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Experiments</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="static/images/assets/compare_ingored_traj_corrected.jpg" alt="Ignored trajectories" loading="lazy" style="max-width: 85%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Observation propagation reduces ignored trajectories and improves training efficiency.
-          </h2>
-        </div>
-        <div class="item">
-          <img src="static/images/assets/training_dynamic.jpg" alt="Training dynamics" loading="lazy" style="max-width: 85%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Wiki-R1 achieves stable improvements across EVQA and InfoSeek with curriculum progression.
-          </h2>
-        </div>
-        <div class="item">
-          <img src="static/images/assets/accuracy_vs_skip_rate_comparison.jpg" alt="Accuracy vs skip rate" loading="lazy" style="max-width: 70%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Better learning signals correlate with higher accuracy and lower skip rates.
-          </h2>
-        </div>
-      </div>
-
-      <h4 class="is-3">
-        On Encyclopedic VQA and InfoSeek, Wiki-R1 reaches <b>37.1%</b> and <b>44.1%</b> accuracy, respectively, and achieves <b>47.8%</b> on InfoSeek’s Unseen-Question split. It also generalizes well to ViQuAE in zero-shot transfer.
-      </h4>
+<!-- Main Results -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Main Results</h2>
+    <div class="content has-text-justified" style="margin-bottom: 1rem;">
+      <p>
+        We evaluate Wiki-R1 on two standard KB-VQA benchmarks: <b>Encyclopedic-VQA</b> (EVQA) and <b>InfoSeek</b>. Unlike prior methods (e.g., ReflectiVA) whose performance is highly sensitive to the retrieval mode, Wiki-R1 <b>consistently achieves strong performance across both benchmarks using a single unified retrieval system</b>.
+      </p>
+    </div>
+    <div class="table-container">
+      <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size: 0.85rem;">
+        <caption style="caption-side: top; text-align: left; margin-bottom: 0.5rem;"><b>Table 1: Performance comparison on EVQA and InfoSeek.</b> <em>V.</em> = visual, <em>T.</em> = textual retrieval. <em>Con.</em> = Contriever, <em>Col.</em> = ColBERT V2.</caption>
+        <thead>
+          <tr><th rowspan="2">Method</th><th colspan="2">Retrieval</th><th colspan="2">EVQA</th><th colspan="3">InfoSeek</th><th rowspan="2">Avg.</th></tr>
+          <tr><th>Model</th><th>Type</th><th>Single</th><th>All</th><th>Un-Q</th><th>Un-E</th><th>All</th></tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="9" style="background:#fff9e6;text-align:center;font-style:italic;">Zero-shot MLLMs</td></tr>
+          <tr><td>BLIP-2</td><td>-</td><td>-</td><td>12.6</td><td>12.4</td><td>12.7</td><td>12.3</td><td>12.5</td><td>12.5</td></tr>
+          <tr><td>InstructBLIP</td><td>-</td><td>-</td><td>11.9</td><td>12.0</td><td>8.9</td><td>7.4</td><td>8.1</td><td>10.1</td></tr>
+          <tr><td>LLaVA-1.5 7B</td><td>-</td><td>-</td><td>16.0</td><td>16.9</td><td>8.3</td><td>8.9</td><td>7.8</td><td>12.4</td></tr>
+          <tr><td>Qwen-2.5-VL 3B</td><td>-</td><td>-</td><td>18.6</td><td>18.8</td><td>26.3</td><td>16.1</td><td>19.6</td><td>19.2</td></tr>
+          <tr><td>Qwen-2.5-VL 7B</td><td>-</td><td>-</td><td>26.6</td><td>26.3</td><td>25.3</td><td>17.2</td><td>19.9</td><td>23.1</td></tr>
+          <tr><td>GPT-4V</td><td>-</td><td>-</td><td>26.9</td><td>28.1</td><td>15.0</td><td>14.3</td><td>14.6</td><td>21.4</td></tr>
+          <tr><td colspan="9" style="background:#fff9e6;text-align:center;font-style:italic;">Retrieval-Augmented Generation</td></tr>
+          <tr><td>DPR<sub>V+T</sub></td><td>CLIP ViT-B/32</td><td>V.+T.</td><td>29.1</td><td>-</td><td>-</td><td>-</td><td>12.4</td><td>-</td></tr>
+          <tr><td>RORA-VLM</td><td>CLIP+Google</td><td>V.+T.</td><td>-</td><td>20.3</td><td>25.1</td><td>27.3</td><td>-</td><td>-</td></tr>
+          <tr><td>Wiki-LLaVA</td><td>CLIP+Con.</td><td>T.</td><td>18.3</td><td>19.6</td><td>28.6</td><td>25.7</td><td>27.1</td><td>23.4</td></tr>
+          <tr><td>EchoSight</td><td>EVA-CLIP-8B</td><td>T.</td><td>22.4</td><td>21.7</td><td>30.0</td><td>30.7</td><td>30.4</td><td>26.1</td></tr>
+          <tr><td>EchoSight</td><td>EVA-CLIP-8B</td><td>V.</td><td>26.4</td><td>24.9</td><td>18.0</td><td>19.8</td><td>18.8</td><td>21.9</td></tr>
+          <tr><td>ReflectiVA</td><td>CLIP ViT-L/14</td><td>T.</td><td>24.9</td><td>26.7</td><td>34.5</td><td>32.9</td><td>33.7</td><td>30.2</td></tr>
+          <tr><td>ReflectiVA</td><td>EVA-CLIP-8B</td><td>T.</td><td>28.0</td><td>29.2</td><td>40.4</td><td>39.8</td><td>40.1</td><td>34.7</td></tr>
+          <tr><td>ReflectiVA</td><td>EVA-CLIP-8B</td><td>V.</td><td>35.5</td><td>35.5</td><td>28.6</td><td>28.1</td><td>28.3</td><td>31.9</td></tr>
+          <tr style="background:#e8f0fe;font-weight:600;"><td>Wiki-R1 3B</td><td>EVA-CLIP+Col.</td><td>V.+T.</td><td>40.4</td><td>35.9</td><td>46.0</td><td>40.3</td><td>42.2</td><td>39.1</td></tr>
+          <tr style="background:#d0e1fd;font-weight:700;"><td>Wiki-R1 7B</td><td>EVA-CLIP+Col.</td><td>V.+T.</td><td><b>41.0</b></td><td><b>37.1</b></td><td><b>47.8</b></td><td><b>42.3</b></td><td><b>44.1</b></td><td><b>40.6</b></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
-<!-- End experiments -->
+<!-- End main results -->
 
-<!-- Visualization -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Visualization</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="static/images/assets/hyper_1.jpg" alt="Hyperparameter sensitivity 1" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Sensitivity analysis of curriculum parameters.
-          </h2>
+<!-- Zero-shot Transfer & Oracle -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-multiline">
+      <!-- ViQuAE -->
+      <div class="column is-half">
+        <h3 class="title is-4">Generalization to ViQuAE (Zero-shot)</h3>
+        <div class="content has-text-justified" style="margin-bottom: 0.8rem;">
+          <p>Wiki-R1 substantially outperforms all MLLM baselines and even surpasses the RC semi-oracle configuration on ViQuAE, demonstrating strong <b>cross-dataset generalization</b>.</p>
         </div>
-        <div class="item">
-          <img src="static/images/assets/hyper_2.jpg" alt="Hyperparameter sensitivity 2" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Robustness trends across gap levels.
-          </h2>
+        <div class="table-container">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size: 0.85rem;">
+            <thead><tr><th>Type</th><th>Model</th><th>F1</th><th>EM</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="4">RC</td><td>Zero-shot</td><td>20.96</td><td>18.06</td></tr>
+              <tr><td>Few-shot</td><td>25.43</td><td>22.07</td></tr>
+              <tr><td>Semi-oracle</td><td>44.10</td><td>40.32</td></tr>
+              <tr><td>Full-oracle</td><td>63.17</td><td>57.55</td></tr>
+              <tr><td rowspan="4">MLLM</td><td>LLaVA-v1.5</td><td>15.1</td><td>26.6</td></tr>
+              <tr><td>Wiki-LLaVA</td><td>12.7</td><td>21.8</td></tr>
+              <tr><td>ReflectiVA</td><td>23.2</td><td>38.1</td></tr>
+              <tr style="background:#e8f0fe;font-weight:600;"><td>Wiki-R1 3B</td><td>53.8</td><td>48.6</td></tr>
+              <tr style="background:#d0e1fd;font-weight:700;"><td>Ours</td><td>Wiki-R1 7B</td><td><b>55.6</b></td><td><b>50.3</b></td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="item">
-          <img src="static/images/assets/seed_1.jpg" alt="Seed robustness 1" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Stability across random seeds (setting A).
-          </h2>
+      </div>
+      <!-- Oracle -->
+      <div class="column is-half">
+        <h3 class="title is-4">Oracle Entity Setting</h3>
+        <div class="content has-text-justified" style="margin-bottom: 0.8rem;">
+          <p>Under the oracle setting where the ground-truth Wikipedia entity is provided, Wiki-R1 shows strong ability to <b>effectively leverage correct retrieval results</b>.</p>
         </div>
-        <div class="item">
-          <img src="static/images/assets/seed_2.jpg" alt="Seed robustness 2" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
-          <h2 class="subtitle has-text-centered">
-            Stability across random seeds (setting B).
-          </h2>
+        <div class="table-container">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size: 0.85rem;">
+            <thead><tr><th>Method</th><th>LLM</th><th>EVQA</th><th>InfoSeek</th></tr></thead>
+            <tbody>
+              <tr><td colspan="4" style="background:#fff9e6;text-align:center;font-style:italic;">KB Article</td></tr>
+              <tr><td>LLaVA-v1.5</td><td>Vicuna-7B</td><td>42.9</td><td>13.8</td></tr>
+              <tr><td>LLaVA-v1.5</td><td>LLaMA-3.1-8B</td><td>54.1</td><td>18.8</td></tr>
+              <tr><td colspan="4" style="background:#fff9e6;text-align:center;font-style:italic;">KB Passage</td></tr>
+              <tr><td>Wiki-LLaVA</td><td>LLaMA-3.1-8B</td><td>46.8</td><td>50.9</td></tr>
+              <tr><td>ReflectiVA</td><td>LLaMA-3.1-8B</td><td><b>75.2</b></td><td>57.6</td></tr>
+              <tr style="background:#e8f0fe;font-weight:600;"><td>Wiki-R1</td><td>Qwen-2.5-3B</td><td>68.5</td><td>65.3</td></tr>
+              <tr style="background:#d0e1fd;font-weight:700;"><td>Wiki-R1</td><td>Qwen-2.5-7B</td><td>69.2</td><td><b>68.2</b></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End visualization -->
+<!-- End zero-shot & oracle -->
+
+<!-- Ablation Study -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Ablation Study</h2>
+    <div class="content has-text-justified" style="margin-bottom: 1rem;">
+      <p>
+        We progressively add each component to validate their contributions. Naive SFT yields limited improvements, while DAPO achieves substantial gains. Our <b>data curriculum further enhances DAPO</b>, especially on the noisier EVQA. Directly applying curriculum sampling alone degrades performance due to observation sparsity—this highlights the necessity of our <b>observation propagation module</b>, which enables sampling to function as intended.
+      </p>
+    </div>
+    <div class="table-container">
+      <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size: 0.85rem;">
+        <caption style="caption-side: top; text-align: left; margin-bottom: 0.5rem;"><b>Ablation study on Qwen-2.5-VL 3B.</b> ✓ = enabled, ✗ = disabled.</caption>
+        <thead>
+          <tr><th>Method</th><th>Data Cur.</th><th>Samp. Cur.</th><th>Obs. Prop.</th><th>EVQA (Single)</th><th>EVQA (All)</th><th>InfoSeek (Un-Q)</th><th>InfoSeek (Un-E)</th><th>InfoSeek (All)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Zero-shot</td><td>-</td><td>-</td><td>-</td><td>18.6</td><td>18.8</td><td>26.3</td><td>16.1</td><td>19.6</td></tr>
+          <tr><td>SFT</td><td>-</td><td>-</td><td>-</td><td>21.6</td><td>25.1</td><td>38.7</td><td>24.9</td><td>29.5</td></tr>
+          <tr><td>SFT</td><td>✓</td><td>-</td><td>-</td><td>-</td><td>34.4</td><td>-</td><td>-</td><td>32.1</td></tr>
+          <tr style="background:#f5f5f5;"><td>DAPO</td><td>✗</td><td>✗</td><td>✗</td><td>35.9</td><td>31.4</td><td>44.9</td><td>39.8</td><td>41.5</td></tr>
+          <tr style="background:#f5f5f5;"><td></td><td>✓</td><td>✗</td><td>✗</td><td>39.4</td><td>34.5</td><td><b>46.9</b></td><td><b>41.1</b></td><td><b>43.0</b></td></tr>
+          <tr style="background:#f5f5f5;"><td></td><td>✓</td><td>✓</td><td>✗</td><td>36.4</td><td>32.1</td><td>45.2</td><td>37.3</td><td>40.0</td></tr>
+          <tr style="background:#d0e1fd;font-weight:700;"><td>Wiki-R1</td><td>✓</td><td>✓</td><td>✓</td><td><b>40.4</b></td><td><b>35.9</b></td><td>46.0</td><td>40.3</td><td>42.2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- End ablation -->
+
+<!-- Training Dynamics & Efficiency -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Training Dynamics & Efficiency</h2>
+    <div class="columns is-centered" style="margin-bottom: 1rem;">
+      <div class="column is-half">
+        <div class="content has-text-justified">
+          <h4 class="title is-5">Efficiency of Observation Propagation</h4>
+          <p>Observation propagation significantly decreases <b>skipped trajectories</b> (those with zero reward signal) during training, improving RL optimization efficiency and overall effectiveness.</p>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="content has-text-justified">
+          <h4 class="title is-5">Training Dynamics Visualization</h4>
+          <p>DAPO shows early rapid improvement but <b>degrades on EVQA</b> due to overfitting on easier InfoSeek data. Wiki-R1 with curriculum training achieves <b>stable improvements on both benchmarks</b>; best performance emerges at the highest curriculum difficulty level.</p>
+        </div>
+      </div>
+    </div>
+    <div id="results-carousel" class="carousel results-carousel">
+      <div class="item">
+        <img src="static/images/assets/compare_ingored_traj_corrected.jpg" alt="Ignored trajectories" loading="lazy" style="max-width: 75%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">
+          <b>Left:</b> Observation propagation reduces ignored trajectories and improves training efficiency.
+        </h2>
+      </div>
+      <div class="item">
+        <img src="static/images/assets/training_dynamic.jpg" alt="Training dynamics" loading="lazy" style="max-width: 75%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">
+          <b>Right:</b> Wiki-R1 achieves stable improvements; ⭐ denotes curriculum difficulty increases.
+        </h2>
+      </div>
+      <div class="item">
+        <img src="static/images/assets/accuracy_vs_skip_rate_comparison.jpg" alt="Accuracy vs skip rate" loading="lazy" style="max-width: 65%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">
+          Better learning signals correlate with higher accuracy and lower skip rates.
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End training dynamics -->
+
+<!-- Training Cost -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Training Efficiency</h2>
+    <div class="content has-text-justified" style="margin-bottom: 1rem;">
+      <p>Wiki-R1 requires <b>substantially fewer training samples</b> (40k total vs. 900k–5.4M for baselines) while achieving superior performance. The training takes only <b>36 A100 GPU-hours for 3B</b> and <b>48 hours for 7B</b>.</p>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+        <div class="table-container">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size: 0.85rem;">
+            <caption style="caption-side: top; text-align: left; margin-bottom: 0.5rem;"><b>Training cost comparison.</b> Time in A100 GPU-hours.</caption>
+            <thead><tr><th>Method</th><th>FT Retrieval</th><th>FT Generation</th><th>#Samples (EVQA)</th><th>#Samples (InfoSeek)</th><th>Time</th></tr></thead>
+            <tbody>
+              <tr><td>Wiki-LLaVA</td><td>✗</td><td>✓</td><td>916k</td><td>903k</td><td>~75</td></tr>
+              <tr><td>Echosight</td><td>✓</td><td>✗</td><td>916k</td><td>903k</td><td>40</td></tr>
+              <tr><td>ReflectiVA</td><td>✗</td><td>✓</td><td>2.9M</td><td>2.5M</td><td>~1,688</td></tr>
+              <tr style="background:#e8f0fe;font-weight:600;"><td>Wiki-R1 (3B)</td><td>✗</td><td>✓</td><td>20k</td><td>20k</td><td><b>36</b></td></tr>
+              <tr style="background:#d0e1fd;font-weight:700;"><td>Wiki-R1 (7B)</td><td>✗</td><td>✓</td><td>20k</td><td>20k</td><td><b>48</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End training cost -->
+
+<!-- Hyperparameter & Robustness -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Hyperparameter Sensitivity & Robustness</h2>
+    <div class="content has-text-justified" style="margin-bottom: 1rem;">
+      <p>We evaluate the sensitivity of two key hyperparameters: the <b>curriculum gap threshold τ</b> and the <b>observation-propagation smoothing factor α</b>. The model converges to similar final accuracy within the explored intervals, confirming that Wiki-R1 is <b>robust to hyperparameter variations</b>. We also verify experimental reliability with <b>three independent runs</b>, showing consistent final performance.</p>
+    </div>
+    <div id="results-carousel" class="carousel results-carousel">
+      <div class="item">
+        <img src="static/images/assets/hyper_1.jpg" alt="Threshold sensitivity on EVQA" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">Gap threshold τ sensitivity on EVQA. ⭐ denotes curriculum difficulty increase.</h2>
+      </div>
+      <div class="item">
+        <img src="static/images/assets/hyper_2.jpg" alt="Threshold sensitivity on InfoSeek" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">Gap threshold τ sensitivity on InfoSeek.</h2>
+      </div>
+      <div class="item">
+        <img src="static/images/assets/hyper_3.jpg" alt="Alpha sensitivity on EVQA" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">Smoothing factor α sensitivity on EVQA.</h2>
+      </div>
+      <div class="item">
+        <img src="static/images/assets/hyper_4.jpg" alt="Alpha sensitivity on InfoSeek" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">Smoothing factor α sensitivity on InfoSeek.</h2>
+      </div>
+      <div class="item">
+        <img src="static/images/assets/seed_1.jpg" alt="Seed robustness 1" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">Stability across three independent runs (EVQA).</h2>
+      </div>
+      <div class="item">
+        <img src="static/images/assets/seed_2.jpg" alt="Seed robustness 2" loading="lazy" style="max-width: 90%; height: auto; margin: 0 auto; display: block;"/>
+        <h2 class="subtitle has-text-centered">Stability across three independent runs (InfoSeek).</h2>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End hyperparameter & robustness -->
 
 <!--BibTex citation-->
   <section class="section" id="BibTeX">
