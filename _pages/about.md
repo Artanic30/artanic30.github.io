@@ -42,8 +42,8 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 
 \*Equal contribution
 
-- [WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition]()<br>Shan Ning, **Longtian Qiu**, Jiaxuan Sun, Xuming He, **CVPR 2026**
-- [Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum](https://openreview.net/forum?id=TH1Tgbjkm7)<br>Shan Ning, **Longtian Qiu**, Xuming He, **ICLR 2026**
+- [WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition](https://artanic30.github.io/project_pages/WikiCLIP/)<br>Shan Ning, **Longtian Qiu**, Jiaxuan Sun, Xuming He, **CVPR 2026 Highlight**
+- [Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum](https://artanic30.github.io/project_pages/WikiR1/)<br>Shan Ning, **Longtian Qiu**, Xuming He, **ICLR 2026**
 - [DA-DPO: Cost-efficient Difficulty-aware Preference Optimization for Reducing MLLM Hallucinations](https://artanic30.github.io/project_pages/DA-DPO)<br>**Longtian Qiu**, Shan Ning, Chuyu Zhang, Jiaxun Sun, Xuming He, **TMLR 2025**
 - [NoisyGRPO: Incentivizing Multimodal CoT Reasoning via Noise Injection and Bayesian Estimation](https://artanic30.github.io/project_pages/NoisyGRPO)<br>**Longtian Qiu**, Shan Ning, Jiaxun Sun, Xuming He, **NeurIPS 2025**
 - [SPHINX: The joint mixing of weights, tasks, and visual embeddings for multi-modal large language models](https://arxiv.org/abs/2311.07575)<br>Ziyi Lin\*, Chris Liu\*, Renrui Zhang\*, Peng Gao\*, **Longtian Qiu\***, Han Xiao, Han Qiu, Chen Lin, Wenqi Shao, Keqin Chen, Jiaming Han, Siyuan Huang, Yichi Zhang, Xuming He, Hongsheng Li, Yu Qiao, **ECCV 2024**
