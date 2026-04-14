@@ -285,13 +285,17 @@
 <!-- Motivation carousel -->
 <section class="hero is-small">
   <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Motivation: The Sparse Reward Problem</h2>
-      <div class="content has-text-justified" style="max-width: 960px; margin: 0 auto 1.5rem auto;">
-        <p>
-          We apply the popular RL algorithm DAPO to KB-VQA and observe that <b>over 80% of samples exhibit zero advantages</b> during training, with overall training accuracy around only <b>10%</b>. This indicates a <b>severe sparse reward problem</b> exacerbated by the distributional gap between pretraining and KB-VQA.
-          Experiments with ground-truth retrieval confirm that <b>retrieval noise is a significant contributing factor</b> to the sparse reward and ineffective training.
-        </p>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Motivation: The Sparse Reward Problem</h2>
+          <div class="content has-text-justified">
+            <p>
+              We apply the popular RL algorithm DAPO to KB-VQA and observe that <b>over 80% of samples exhibit zero advantages</b> during training, with overall training accuracy around only <b>10%</b>. This indicates a <b>severe sparse reward problem</b> exacerbated by the distributional gap between pretraining and KB-VQA.
+              Experiments with ground-truth retrieval confirm that <b>retrieval noise is a significant contributing factor</b> to the sparse reward and ineffective training.
+            </p>
+          </div>
+        </div>
       </div>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item">
