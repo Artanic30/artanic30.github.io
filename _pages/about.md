@@ -77,9 +77,9 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 
 # 💼 Experience
 
-- *2025.12 - now*, Research Intern, **Tencent Youtu Lab**, Shenzhen, China
-- *2025.09 - now*, Research Intern, **Tencent Hunyuan**, Shenzhen, China
 - *2023.06 - 2024.08*, Research Intern, **Shanghai AI Lab (OpenGV Lab)**, Shanghai, China
+- *2025.12 - 2026.06*, Research Intern, **Tencent Youtu Lab**, Shanghai, China
+- *2026.06 - now*, Project Up Intern, **Tencent Hunyuan (Omni)**, Shanghai, China
 
 # 📖 Educations
 
