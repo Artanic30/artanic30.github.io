@@ -18,12 +18,13 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 
 Hi there! I am a forth-year Ph.D. candidate at ShanghaiTech university's [PLUS](https://plus.sist.shanghaitech.edu.cn) lab, under the mentorship of Prof. [Xuming He](https://faculty.sist.shanghaitech.edu.cn/faculty/hexm/index.html). Previously, I got my B.Sc. degree in 2022 from ShanghaiTech University. I also had the wonderful opportunity to spend time as a research intern at Shanghai AI Lab, supervised by [Dr. Peng Gao](https://scholar.google.com/citations?user=_go6DPsAAAAJ&hl=zh-CN).
-I am currently a research intern at **Tencent Youtu Lab**, where I focus on post-training for multimodal document understanding.
-
+and a research intern at Tencent Youtu Lab, where I focus on post-training for multi-modal document understanding and coding agent.
+I'm currently a research intern at Tencent Hunyuan working on post-training for Omni model.
 My research interest includes Multimodel Learning and Data-centric AI. In pursuit of this goal, my current research work involves **multimodal large language model**, and **post training with RL**.
 
 # 🔥 News
-
+- *2026.06*: I attended the CVPR 2026 conference onsite in Denver and gave a poster presentation.
+- *2026.04*: I attended the ICLR 2026 conference onsite in Rio de Janeiro and gave a poster presentation.
 - *2026.02*: &nbsp;🎉🎉 one papers accepted by CVPR 2026
 - *2026.01*: &nbsp;🎉🎉 one papers accepted by ICLR 2026
 - *2025.12*: &nbsp;🎉🎉 one papers accepted by TMLR 2025
@@ -74,6 +75,12 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 
 [//]: # (- *2019.05 - 2020.02*, [Lorem]&#40;https://github.com/&#41;, China.)
 
+# 💼 Experience
+
+- *2025.12 - now*, Research Intern, **Tencent Youtu Lab**, Shenzhen, China
+- *2025.09 - now*, Research Intern, **Tencent Hunyuan**, Shenzhen, China
+- *2023.06 - 2024.08*, Research Intern, **Shanghai AI Lab (OpenGV Lab)**, Shanghai, China
+
 # 📖 Educations
 
 - *2018.09 - 2022.06*, **B.E.** in School of Information Science and Technology, ShanghaiTech University, Shanghai, China
@@ -81,4 +88,4 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 
 # 💻 Academic Service
 
-- Reviewer of CVPR 2024~2026, ECCV 2024, NeurIPS 2024~2025, ICLR 2024~2026, ICCV 2025
+- Reviewer of CVPR, ECCV, NeurIPS, ICLR, ICCV since 2023
