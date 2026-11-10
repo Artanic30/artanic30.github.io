@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="RaRe: Reasoning-Aware Relational Representation Learning for Open-Vocabulary Scene Graph Generation">
+  <meta name="description" content="RaRe turns MLLM-generated chain-of-thought rationales into discriminative relation representations for open-vocabulary scene graph generation.">
+  <meta name="keywords" content="RaRe, open-vocabulary scene graph generation, scene graph generation, multimodal large language models, chain-of-thought, reinforcement learning">
+  <meta name="author" content="Jiawei Xiao, Boya Wang, Longtian Qiu, Shan Ning, Xuming He">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ShanghaiTech University">
+  <meta property="og:title" content="RaRe: Reasoning-Aware Relational Representation Learning">
+  <meta property="og:description" content="Reasoning-aware relational representations for open-vocabulary scene graph generation.">
+  <meta property="og:url" content="https://artanic30.github.io/project_pages/RaRe/">
+  <meta property="og:image" content="https://artanic30.github.io/project_pages/RaRe/static/images/teaser.png">
+  <meta property="og:image:alt" content="RaRe performance and qualitative comparison">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RaRe">
+  <meta name="twitter:description" content="Reasoning-aware relational representation learning for open-vocabulary scene graph generation.">
+  <meta name="twitter:image" content="https://artanic30.github.io/project_pages/RaRe/static/images/teaser.png">
+
+  <meta name="citation_title" content="Reasoning-Aware Relational Representation Learning for Open-Vocabulary Scene Graph Generation">
+  <meta name="citation_author" content="Xiao, Jiawei">
+  <meta name="citation_author" content="Wang, Boya">
+  <meta name="citation_author" content="Qiu, Longtian">
+  <meta name="citation_author" content="Ning, Shan">
+  <meta name="citation_author" content="He, Xuming">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="NeurIPS 2026">
+
+  <title>RaRe | Open-Vocabulary Scene Graph Generation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Source+Serif+4:ital,wght@0,600;1,500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../WikiCLIP/static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Reasoning-Aware Relational Representation Learning for Open-Vocabulary Scene Graph Generation",
+    "description": "RaRe transforms MLLM-generated chain-of-thought rationales into structured and discriminative relation representations for open-vocabulary scene graph generation.",
+    "author": [
+      {"@type": "Person", "name": "Jiawei Xiao"},
+      {"@type": "Person", "name": "Boya Wang"},
+      {"@type": "Person", "name": "Longtian Qiu"},
+      {"@type": "Person", "name": "Shan Ning"},
+      {"@type": "Person", "name": "Xuming He"}
+    ],
+    "datePublished": "2026",
+    "publisher": {"@type": "Organization", "name": "NeurIPS"},
+    "url": "https://artanic30.github.io/project_pages/RaRe/",
+    "image": "https://artanic30.github.io/project_pages/RaRe/static/images/teaser.png",
+    "keywords": ["open-vocabulary scene graph generation", "relational representation learning", "chain-of-thought", "multimodal large language model"],
+    "isAccessibleForFree": true
+  }
+  </script>
+</head>
+<body>
+  <button class="scroll-to-top" id="scroll-to-top" title="Scroll to top" aria-label="Scroll to top">
+    <span aria-hidden="true">↑</span>
+  </button>
+
+  <main>
+    <section class="hero publication-header">
+      <div class="hero-body">
+        <div class="container is-max-desktop has-text-centered">
+          <div class="project-mark">RaRe</div>
+          <h1 class="title publication-title">Reasoning-Aware Relational Representation Learning for Open-Vocabulary Scene Graph Generation</h1>
+
+          <div class="publication-authors">
+            <span class="author-block">Jiawei Xiao<sup>1,*</sup>,</span>
+            <span class="author-block">Boya Wang<sup>1,*</sup>,</span>
+            <span class="author-block"><a href="https://artanic30.github.io/" target="_blank" rel="noopener">Longtian Qiu</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://scholar.google.com/citations?user=7dMbghYAAAAJ&amp;hl=en" target="_blank" rel="noopener">Shan Ning</a><sup>1,3</sup>,</span>
+            <span class="author-block"><a href="https://faculty.sist.shanghaitech.edu.cn/faculty/hexm/index.html" target="_blank" rel="noopener">Xuming He</a><sup>1,2,†</sup></span>
+          </div>
+
+          <div class="affiliations">
+            <span><sup>1</sup>ShanghaiTech University</span>
+            <span><sup>2</sup>Shanghai Engineering Research Center of Intelligent Vision and Imaging</span>
+            <span><sup>3</sup>Lingang Laboratory</span>
+            <small><sup>*</sup>Equal contribution &nbsp; <sup>†</sup>Corresponding author</small>
+          </div>
+
+          <div class="venue-badge">NeurIPS 2026</div>
+
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="https://openreview.net/forum?id=8kAKJfrIKh#discussion" target="_blank" rel="noopener" class="button is-normal is-rounded is-dark">
+                <span class="text-icon" aria-hidden="true">OR</span>
+                <span>OpenReview</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/dibur03/RaRe" target="_blank" rel="noopener" class="button is-normal is-rounded is-dark">
+                <span class="text-icon code-icon" aria-hidden="true">&lt;/&gt;</span>
+                <span>Code</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <span class="button is-normal is-rounded is-light disabled-link" aria-disabled="true">
+                <span class="text-icon" aria-hidden="true">arXiv</span>
+                <span>Coming soon</span>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section teaser-section">
+      <div class="container is-max-desktop">
+        <figure class="paper-figure hero-figure">
+          <img src="static/images/teaser.png" alt="RaRe performance and qualitative comparison" fetchpriority="high">
+          <figcaption>
+            RaRe improves category-balanced relation recognition and encourages object-pair-specific relational evidence instead of generic CoT descriptions.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section is-light">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <span class="eyebrow">Overview</span>
+          <h2 class="title is-2">Abstract</h2>
+        </div>
+        <div class="content abstract-copy">
+          <p>
+            Open-Vocabulary Scene Graph Generation (OV-SGG) requires models to recognize visual relationships beyond the training vocabulary, yet existing methods often rely on dataset-specific object–predicate co-occurrence patterns. Under long-tailed distributions and noisy object localization, such reliance produces biased, entangled relation representations and limits both rare-relation recognition and generalization to unseen predicates.
+          </p>
+          <p>
+            We propose <strong>RaRe</strong>, a reasoning-aware relational representation learning framework that transforms MLLM-generated chain-of-thought rationales into structured relation embeddings. RaRe first aligns rationale embeddings with textualized relation descriptions through self-supervised contrastive learning, then refines rationale generation with a specificity-oriented reinforcement learning objective that favors object-pair-specific relational evidence. Experiments on VG150 and PSG demonstrate improved category-balanced recognition, while revealing that the additional gains from learning and calibration vary across datasets and proposal settings.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <span class="eyebrow">Why RaRe?</span>
+          <h2 class="title is-2">From free-form reasoning to structured relations</h2>
+        </div>
+
+        <div class="columns challenge-grid">
+          <div class="column">
+            <article class="insight-card">
+              <span class="card-index">01</span>
+              <h3>Transfer beyond labels</h3>
+              <p>Instance-level rationales capture spatial layout, object attributes, action states, and contextual cues that transfer beyond a fixed predicate vocabulary.</p>
+            </article>
+          </div>
+          <div class="column">
+            <article class="insight-card">
+              <span class="card-index">02</span>
+              <h3>Separate similar relations</h3>
+              <p>Contrastive alignment reshapes linguistically plausible but entangled CoT outputs into a retrieval-compatible relational embedding space.</p>
+            </article>
+          </div>
+          <div class="column">
+            <article class="insight-card">
+              <span class="card-index">03</span>
+              <h3>Reward specificity</h3>
+              <p>Policy optimization penalizes responses shared across unrelated entity pairs and promotes distinctive, object-pair-specific evidence.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method-section is-light">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <span class="eyebrow">Approach</span>
+          <h2 class="title is-2">Method</h2>
+        </div>
+
+        <figure class="paper-figure">
+          <img src="static/images/pipeline.png" alt="RaRe training pipeline" loading="lazy">
+          <figcaption>
+            <strong>Training pipeline.</strong> RaRe learns a relational embedding space from paired CoT rationales and predictions, then uses this space to optimize MLLM generation through a specificity reward.
+          </figcaption>
+        </figure>
+
+        <div class="method-steps">
+          <article class="method-step">
+            <div class="step-number">1</div>
+            <div>
+              <h3>Self-Supervised Relational Space Construction</h3>
+              <p>Each MLLM response naturally couples a CoT rationale with a relation prediction. A symmetric InfoNCE objective aligns these two views without requiring novel-predicate annotations.</p>
+              <div class="equation">L<sub>stage1</sub> = ½ (L<sub>CoT→pred</sub> + L<sub>pred→CoT</sub>)</div>
+            </div>
+          </article>
+          <article class="method-step">
+            <div class="step-number">2</div>
+            <div>
+              <h3>Specificity-Driven Policy Optimization</h3>
+              <p>The learned embedding model supplies a representation-aligned reward. Responses resembling outputs for other entity pairs receive lower rewards, steering GRPO toward specific relational evidence.</p>
+              <div class="equation">r<sub>i</sub> = r<sub>i</sub><sup>spec</sup> + λ r<sub>i</sub><sup>fmt</sup></div>
+            </div>
+          </article>
+          <article class="method-step">
+            <div class="step-number">3</div>
+            <div>
+              <h3>Embedding Retrieval</h3>
+              <p>At inference, RaRe embeds the complete generated response and matches it against multi-template predicate prototypes, followed by lightweight score normalization and prior calibration.</p>
+            </div>
+          </article>
+        </div>
+
+        <figure class="paper-figure compact-figure">
+          <img src="static/images/inference.jpg" alt="RaRe inference pipeline" loading="lazy">
+          <figcaption>
+            <strong>Inference.</strong> CoT-based visual description, multi-template predicate prototypes, and embedding retrieval produce the final structured relation.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section results-section">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <span class="eyebrow">Evaluation</span>
+          <h2 class="title is-2">Main Results</h2>
+          <p>VG150 evaluates both Predicate Classification (PredCls) and Scene Graph Detection (SGDet); PSG provides an additional detector-based evaluation.</p>
+        </div>
+
+        <div class="metric-strip">
+          <div class="metric-card">
+            <span class="metric-value">22.49</span>
+            <span class="metric-label">Novel mR@50</span>
+            <span class="metric-context">VG150 · PredCls</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-value">24.62</span>
+            <span class="metric-label">Total mR@50</span>
+            <span class="metric-context">VG150 · PredCls</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-value">10.38</span>
+            <span class="metric-label">Total mR@50</span>
+            <span class="metric-context">VG150 · SGDet</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-value">17.52</span>
+            <span class="metric-label">Total mR@50</span>
+            <span class="metric-context">PSG · SGDet</span>
+          </div>
+        </div>
+
+        <div class="result-panels">
+          <article class="result-panel">
+            <h3>VG150 PredCls</h3>
+            <div class="table-container">
+              <table class="table is-fullwidth result-table">
+                <thead>
+                  <tr><th>Method</th><th>Total mR@50/100</th><th>Base mR@50/100</th><th>Novel mR@50/100</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>SGTR+ + RAHP</td><td>16.88 / 22.18</td><td>20.51 / 25.18</td><td>11.82 / 15.46</td></tr>
+                  <tr><td>PE-NET + RAHP</td><td>24.50 / <strong>28.25</strong></td><td>24.99 / <strong>30.19</strong></td><td>15.70 / 23.73</td></tr>
+                  <tr class="ours-row"><td><strong>RaRe</strong></td><td><strong>24.62</strong> / 25.80</td><td><strong>25.53</strong> / 26.45</td><td><strong>22.49 / 24.27</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="result-panel">
+            <h3>Detector-based SGDet</h3>
+            <div class="table-container">
+              <table class="table is-fullwidth result-table">
+                <thead>
+                  <tr><th>Dataset / Method</th><th>Total mR@50/100</th><th>Novel mR@50/100</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>VG150 · ACC</td><td>4.30 / 5.11</td><td>2.48 / 3.17</td></tr>
+                  <tr class="ours-row"><td><strong>VG150 · ACC + RaRe</strong></td><td><strong>10.38 / 12.32</strong></td><td><strong>6.69 / 8.02</strong></td></tr>
+                  <tr><td>PSG · PGSG</td><td>13.50 / 16.40</td><td>7.40 / 11.30</td></tr>
+                  <tr class="ours-row"><td><strong>PSG · PGSG + RaRe</strong></td><td><strong>17.52 / 20.59</strong></td><td><strong>14.76 / 16.10</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+
+        <div class="result-note">
+          <span class="note-icon" aria-hidden="true">i</span>
+          <p>Under fixed ACC proposals on VG150, training-free MLLM retrieval explains most of the Total mR gain; adding SSL, RL, and prior calibration gives modest additional Total mR gains while reducing Novel mR. On PSG, the same-proposal ablation improves both Total and Novel mR. RaRe therefore reports these setting-dependent effects explicitly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section is-light">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <span class="eyebrow">Representation Analysis</span>
+          <h2 class="title is-2">More discriminative relational reasoning</h2>
+        </div>
+        <div class="columns analysis-grid">
+          <div class="column is-two-thirds">
+            <figure class="paper-figure">
+              <img src="static/images/embedding-analysis.jpg" alt="t-SNE visualization of CoT representations" loading="lazy">
+              <figcaption>Self-supervised alignment and GRPO improve relational separation over the off-the-shelf embedding baseline.</figcaption>
+            </figure>
+          </div>
+          <div class="column">
+            <div class="analysis-copy">
+              <h3>What changes?</h3>
+              <ul>
+                <li>Global macro mean ratio rises from <strong>0.0944</strong> to <strong>0.3177</strong>.</li>
+                <li>Novel macro mean ratio rises from <strong>0.9683</strong> to <strong>1.4717</strong>.</li>
+                <li>Average CoT length falls from <strong>392.8</strong> to <strong>297.1</strong> tokens.</li>
+              </ul>
+              <p>The improvements therefore do not rely on longer rationales; they come from making the generated evidence more specific and retrieval-compatible.</p>
+            </div>
+          </div>
+        </div>
+
+        <figure class="paper-figure compact-figure">
+          <img src="static/images/head-shift.png" alt="Head predicate prediction shift analysis" loading="lazy">
+          <figcaption>Novel-predicate samples shift away from frequent head predicates and toward their novel ground-truth semantics.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <span class="eyebrow">Qualitative Results</span>
+          <h2 class="title is-2">Object-pair-specific evidence</h2>
+        </div>
+        <div class="qualitative-grid">
+          <figure class="qualitative-card">
+            <img src="static/images/qualitative-1.png" alt="Qualitative example of motorcycle and street relation" loading="lazy">
+            <figcaption><strong>Parked on.</strong> RaRe resolves a more specific relation from visual state and contact evidence.</figcaption>
+          </figure>
+          <figure class="qualitative-card">
+            <img src="static/images/qualitative-2.png" alt="Qualitative example of person carrying surfboard" loading="lazy">
+            <figcaption><strong>Carrying.</strong> The rationale focuses on how the person physically holds the surfboard.</figcaption>
+          </figure>
+          <figure class="qualitative-card">
+            <img src="static/images/qualitative-3.png" alt="Qualitative example of wheel and skateboard relation" loading="lazy">
+            <figcaption><strong>Part of.</strong> Structural and functional evidence separates component relations from generic spatial ones.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section is-light" id="BibTeX">
+      <div class="container is-max-desktop">
+        <div class="bibtex-header">
+          <div>
+            <span class="eyebrow">Citation</span>
+            <h2 class="title is-2">BibTeX</h2>
+          </div>
+          <button class="copy-bibtex-btn" id="copy-bibtex" type="button">
+            <span aria-hidden="true">⧉</span>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre id="bibtex-code"><code>@inproceedings{xiao2026rare,
+  title={Reasoning-Aware Relational Representation Learning for Open-Vocabulary Scene Graph Generation},
+  author={Xiao, Jiawei and Wang, Boya and Qiu, Longtian and Ning, Shan and He, Xuming},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2026}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container is-max-desktop has-text-centered">
+      <p>
+        This website uses the structure of the
+        <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const scrollButton = document.getElementById('scroll-to-top');
+    window.addEventListener('scroll', () => {
+      scrollButton.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    scrollButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    document.getElementById('copy-bibtex').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      const label = button.querySelector('span');
+      const text = document.getElementById('bibtex-code').textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (error) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
+      }
+      label.textContent = 'Copied';
+      button.classList.add('copied');
+      setTimeout(() => {
+        label.textContent = 'Copy';
+        button.classList.remove('copied');
+      }, 1800);
+    });
+  </script>
+</body>
+</html>

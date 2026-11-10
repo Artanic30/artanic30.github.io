@@ -23,6 +23,7 @@ I'm currently a research intern at Tencent Hunyuan working on post-training for 
 My research interest includes Multimodel Learning and Data-centric AI. In pursuit of this goal, my current research work involves **multimodal large language model**, and **post training with RL**.
 
 # 🔥 News
+- *2026.02*: &nbsp;🎉🎉 one papers accepted by NeurIPS 2026
 - *2026.06*: I attended the CVPR 2026 conference onsite in Denver and gave a poster presentation.
 - *2026.04*: I attended the ICLR 2026 conference onsite in Rio de Janeiro and gave a poster presentation.
 - *2026.02*: &nbsp;🎉🎉 one papers accepted by CVPR 2026
@@ -43,6 +44,7 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 
 \*Equal contribution
 
+- [RaRe: Reasoning-Aware Relational Representation Learning for Open-Vocabulary Scene Graph Generation](https://artanic30.github.io/project_pages/RaRe/)<br>Jiawei Xiao\*, Boya Wang\*, **Longtian Qiu**, Shan Ning, Xuming He, **NeurIPS 2026**
 - [WikiCLIP: An Efficient Contrastive Baseline for Open-domain Visual Entity Recognition](https://artanic30.github.io/project_pages/WikiCLIP/)<br>Shan Ning, **Longtian Qiu**, Jiaxuan Sun, Xuming He, **CVPR 2026 Highlight**
 - [Wiki-R1: Incentivizing Multimodal Reasoning for Knowledge-based VQA via Data and Sampling Curriculum](https://artanic30.github.io/project_pages/WikiR1/)<br>Shan Ning, **Longtian Qiu**, Xuming He, **ICLR 2026**
 - [DA-DPO: Cost-efficient Difficulty-aware Preference Optimization for Reducing MLLM Hallucinations](https://artanic30.github.io/project_pages/DA-DPO)<br>**Longtian Qiu**, Shan Ning, Chuyu Zhang, Jiaxun Sun, Xuming He, **TMLR 2025**
@@ -58,9 +60,9 @@ My research interest includes Multimodel Learning and Data-centric AI. In pursui
 
 [//]: # (- [Joint-mae: 2d-3d joint masked autoencoders for 3d point cloud pre-training]&#40;https://arxiv.org/abs/2302.14007&#41;<br>Ziyu Guo, Renrui Zhang, **Longtian Qiu**, Xianzhi Li, Pheng-Ann Heng, **IJCAI 2023**)
 
-[//]: # (# 🎖 Honors and Awards)
+# 🎖 Honors and Awards
 
-[//]: # (- *2021.10* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. )
+- **National Scholarship for Graduate Students 2026**
 
 [//]: # (- *2021.09* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. )
 
